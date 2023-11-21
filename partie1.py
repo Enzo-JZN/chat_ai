@@ -7,6 +7,7 @@ def list_of_files(directory, extension):
             files_names.append(filename)
     return files_names
 
+# Test Commentaire
 
 # Call of the function
 directory = "./speeches"
