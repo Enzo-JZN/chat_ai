@@ -7,8 +7,6 @@ def list_of_files(directory, extension):
             files_names.append(filename)
     return files_names
 
-# Test Commentaire
-
 # Call of the function
 directory = "./speeches"
 files_names = list_of_files(directory, "txt")
@@ -157,3 +155,30 @@ def IDF_par_fichier():
     return dico
 print(IDF_par_fichier())
 
+# Indiquer le mot le plus utilisé par le predident chirac
+def indiquer_le_mot_plus_utilise(president):
+
+    # On donne le chemin pour acceder au fichier qui contiennent le nom du president recherche
+    directory = './cleaned' # "/Users/enzojuzyna/Downloads/projet/speeches"    
+    files_names = list_of_files(directory, "txt")
+    
+    # On créera un liste max qui prendra pour valeur le mot avec le plus d'occurences, on l'initialise à 0
+    max = [0, 0]
+    contenu = ""
+    for i in files_names:
+        if president in i:
+            with open (directory + '/'+ i, 'r') as fichier:
+                contenu += fichier.read() + " "
+    dico = occurences_chaines(contenu)
+    for a in dico.items():
+        if max[1] < a[1] and a[0] != '':
+            max = a
+
+    liste_mot = [max]
+    for j in dico.items():
+        if max[1] == j[1]:
+            if max[0] != j[0]:
+                liste_mot.append(j[0])
+    return liste_mot
+
+print(indiquer_le_mot_plus_utilise()) 
