@@ -82,20 +82,26 @@ def convertir_textes_miniscules():
             fichier.write(contenu.lower())
             
 def supprimer_ponctuation():
+    #trouve le chemin d'accés des fichiers à nettoyer
     directory = "./cleaned"
     files_names = list_of_files(directory, "txt")
+    #on fait une boucle qui ouvre chaque fichier du répertoire un par un et on met le texte dans une variable
     for nom_fichier in files_names:
         with open(directory + "/" + nom_fichier, "r") as fichier:
             contenu = fichier.read()
         indice = []
+        #dans une liste on met toutes les positions où il y a un signe de ponctuations
         for i in range (len(contenu)):
             if contenu[i] in [',', ';', "'", ':', '/', '.'] : 
                 indice.append(i)
         n = 0
         contenu1 = ""
+        # on fait une boucle qui va copier le contenue du texte jusqu'à la postion d'une ponctuation et remplace cette 
+        #ponctuation par un espace et cela jusqu'à la fin du texte
         for i in indice :
             contenu1 = contenu1 + contenu[n:i] + " "
             n = i+1
+        #reécrit le nouveau texte sans la ponctuation
         with open(directory + "/" + nom_fichier, "w") as fichier_modifie:
             fichier_modifie.write(contenu1)
         
