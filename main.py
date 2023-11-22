@@ -181,4 +181,25 @@ def indiquer_le_mot_plus_utilise(president):
                 liste_mot.append(j[0])
     return liste_mot
 
-print(indiquer_le_mot_plus_utilise()) 
+print(indiquer_le_mot_plus_utilise(president)) 
+
+#President qui ont parlé de la Nation:
+
+# On donne le chemin pour acceder au fichier qui contiennent le nom du president recherche
+directory = './speeches' # "/Users/enzojuzyna/Downloads/projet/speeches"    
+files_names = list_of_files(directory, "txt")
+    
+# On créera un liste max qui prendra pour valeur le mot avec le plus d'occurences, on l'initialise à 0
+liste_president = []
+for i in files_names:
+    with open (directory + '/'+ i, 'r') as fichier:
+        contenu = fichier.read()
+    if "Nation" in contenu or "nation" in contenu:
+        liste_president.append(i[11:-4])
+
+set_president = set()
+for i in extract_president_names(files_names):
+    if i in liste_president:
+        set_president.add(i)
+            
+print(set_president)
