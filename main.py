@@ -90,7 +90,7 @@ def supprimer_ponctuation():
         indice = []
         #dans une liste on met toutes les positions où il y a un signe de ponctuations
         for i in range (len(contenu)):
-            if contenu[i] in [',', ';', "'", ':', '/', '.'] : 
+            if (ord(contenu[i]) >= 21 and ord(contenu[i]) <=47) or (ord(contenu[i]) >=58 and ord(contenu[i])<= 64) or (contenu[i])=="\n" :
                 indice.append(i)
         n = 0
         contenu1 = ""
@@ -115,7 +115,7 @@ def occurences_chaines(chaine):
 
     # On fait une boucle pour obtenir tous les indices où se trouvent de signes de ponctuation 
     for i in range(len(chaine)):
-        if chaine[i] in [',', ';', "'", ':', '/', '.', ' ']: 
+        if (ord(chaine[i]) >= 21 and ord(chaine[i]) <=47) or (ord(chaine[i]) >=58 and ord(chaine[i])<= 64) or (chaine[i])=="\n" :
             indice.append(i)
         
     # On utlisera les indices precedemment acquis pour effectuer des slides dans la chaine de caractere initial et
