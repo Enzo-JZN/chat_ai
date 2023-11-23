@@ -141,19 +141,33 @@ def occurences_chaines(chaine):
 # Écrire une fonction qui prend en paramètre le répertoire où se trouve l’ensemble des fichiers du corpus
 # et qui retourne un dictionnaire associant à chaque mot son score IDF. 
 
-def IDF_par_fichier():
+def IDF_par_fichier(repertoire):
     
-    directory = './speeches' # "/Users/enzojuzyna/Downloads/projet/speeches"    
+    directory = './{}'.format(repertoire) # "/Users/enzojuzyna/Downloads/projet/speeches"    
     files_names = list_of_files(directory, "txt")
 
-    dico = {}
+    contenu = ""
+    liste_contenu = []
     for i in files_names:
         with open(directory + '/' + i, 'r') as fichier_IDF :
             contenu = fichier_IDF.read()
-            ocurences = occurences_chaines(contenu)
-            dico[i] = 1
+            contenu = contenu.split()
+            liste_contenu += contenu
+    set_mot = set(liste_contenu)
+
+    dico = {}
+    for mot in set_mot:
+        occurence = 0
+        for i in files_names:
+            with open(directory + '/' + i, 'r') as fichier_IDF :
+                contenu = fichier_IDF.read()
+                if mot in contenu:
+                    occurence += 1
+        calcul_idf = math.log10((len(files_names) / occurence) + 1)
+        dico[mot] = calcul_idf
     return dico
-print(IDF_par_fichier())
+
+a = IDF_par_fichier("cleaned")
 
 # Indiquer le mot le plus utilisé par le predident chirac
 def indiquer_le_mot_plus_utilise(president):
