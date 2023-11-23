@@ -181,7 +181,7 @@ def indiquer_le_mot_plus_utilise(president):
                 liste_mot.append(j[0])
     return liste_mot
 
-print(indiquer_le_mot_plus_utilise("Chirac)) 
+print(indiquer_le_mot_plus_utilise("Chirac")) 
 
 #President qui ont parlé de la Nation:
 
