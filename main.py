@@ -142,10 +142,10 @@ def occurences_chaines(chaine):
 # et qui retourne un dictionnaire associant à chaque mot son score IDF. 
 
 def IDF_par_fichier(repertoire):
-    
+
     directory = './{}'.format(repertoire) # "/Users/enzojuzyna/Downloads/projet/speeches"    
     files_names = list_of_files(directory, "txt")
-
+#on va créer une liste qui va contenir tous les mots présents dans les textes du répertoire en un seul exemplaire
     contenu = ""
     liste_contenu = []
     for i in files_names:
@@ -154,8 +154,10 @@ def IDF_par_fichier(repertoire):
             contenu = contenu.split()
             liste_contenu += contenu
     set_mot = set(liste_contenu)
-
+#On crée un dico qui va contenir tous les mots ainsi que leurs IDF
     dico = {}
+#Pour chaque mot on va vérifier s'il se trouve dans un document et pour chaque document on va ajouté +1 à un compteur 
+#afin de pourvoir calculer l'IDF
     for mot in set_mot:
         occurence = 0
         for i in files_names:
