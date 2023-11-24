@@ -423,3 +423,6 @@ def mot_evoque():
             mots_evoque.append(score)
     return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
 # print(mot_evoque())
+
+def clear_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
