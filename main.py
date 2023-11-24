@@ -266,17 +266,16 @@ def calcul_mot_dit_nn_important():
 
 #Partie 2
 # 1 Afficher la liste des mots les moins importants dans le corpus de documents.
-liste_mot_non_important = []
-dico_moyenne = {}
-for i in res.items():
-    nb = 0
-    for values in i[1]:
-        nb += values
-    if nb <= 0.5:
-        liste_mot_non_important.append(i[0])
-# print("la liste des mots les moins importants dans le corpus du documents sont: ", liste_mot_non_important)
+def mot_moins_important():
+    liste_mot_non_important = []
+    for i in res.items():
+        nb = 0
+        for values in i[1]:
+            nb += values
+        if nb <= 0.5:
+            liste_mot_non_important.append(i[0])
+    return ("la liste des mots les moins importants dans tous les documents sont: ", liste_mot_non_important)
 
-    
 #############################################################################
 ### Question 2 Afficher le(s) mot(s) ayant le score TD-IDF le plus élevé ###
 ############################################################################
