@@ -194,8 +194,8 @@ def TF_IDF(repertoire):
             with open("./cleaned/{}".format(i), "r") as fichier1:
 
                 # On cherche à obtenir une liste de tous les mots
-                texte1 = fichier1.read()
-                contenu_mot = texte1.split()
+                contenu = fichier1.read()
+                contenu_mot = contenu.split()
 
             valeur_TF = 0
             # Vérification si le mot est présent dans le contenu du fichier, pout optimiser, gagner en vitesse, si le mot n'est pas 
