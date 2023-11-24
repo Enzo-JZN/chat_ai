@@ -6,7 +6,7 @@ def list_of_files(directory, extension):
     for filename in os.listdir(directory):
         if filename.endswith(extension):
             files_names.append(filename)
-    return files_names
+    return sorted(files_names)
 
 # Call of the function
 directory = "./speeches"
