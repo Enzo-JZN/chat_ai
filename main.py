@@ -70,8 +70,7 @@ def convertir_textes_miniscules():
 
         # On crée le chemin et le noveau nom du fichier copier
         chemin_cleaned = directory_cleaned+"/"+i
-        chemin_cleaned = directory_cleaned + "/" + i[:-4]
-        chemin_cleaned += "_copy" + i[-4:]
+        chemin_cleaned = directory_cleaned + "/" + i
 
         # On crée le fihcier copier, puis on copie le contenu du premier fihcier et on le rajoute le tout en miniscule
         with open(chemin_cleaned, "w") as fichier:
@@ -170,6 +169,40 @@ def IDF_par_fichier(repertoire):
     return dico
 
 a = IDF_par_fichier("cleaned")
+
+#Fonction TF_IDF 
+
+def TF_IDF1(repertoire):
+    matrice_TF_IDF = {}
+    dico_IDF = IDF_par_fichier(repertoire)
+    directory = './{}'.format(repertoire) # "/Users/enzojuzyna/Downloads/projet/speeches"    
+    files_names = list_of_files(directory, "txt")
+    premiere_colonnes = ["Mot"] + files_names
+    print(premiere_colonnes)
+    for mot in list(dico_IDF.keys()):
+        score_tf_idf = []
+        for i in files_names:
+            
+            with open("./cleaned/{}".format(i), "r") as fichier1:
+                texte1 = fichier1.read()
+                contenu_mot = texte1.split()
+
+            score_TF_valeur = 0
+            if (mot in contenu_mot) == True:
+                # Fonction TF nn optimisée trop longue, changement de méthode
+                # score_TF = occurences_chaines(texte1)
+                # score_TF_valeur = score_TF[mot]
+                for i in contenu_mot:
+                    if mot == i:
+                        score_TF_valeur += 1
+            else : 
+                score_TF_valeur = 0
+            score_tf_idf.append(score_TF_valeur * dico_IDF[mot])
+        matrice_TF_IDF[mot] = score_tf_idf
+    print(len(matrice_TF_IDF))
+    return matrice_TF_IDF
+
+print(TF_IDF1("cleaned"))
 
 # Indiquer le mot le plus utilisé par le predident chirac
 def indiquer_le_mot_plus_utilise(president):
