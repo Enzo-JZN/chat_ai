@@ -173,8 +173,6 @@ a = IDF_par_fichier("cleaned")
 
 #Fonction TF_IDF 
 
-#Fonction TF_IDF 
-
 def TF_IDF(repertoire):
     # Initialisation d'un dictionnaire pour stocker la matrice TF-IDF, d'un dico pour recevoir la valeur de chaque mot et son idf, 
     # ansi la récuparation du chemin et de la liste des noms du fichier
@@ -224,49 +222,72 @@ def TF_IDF(repertoire):
 res = TF_IDF("cleaned")
 print(res)
 
+###############################################
+### Question 1 Affichage valeur TD-IDF == 0 ###
+###############################################
 
-#Question 2 Affichage valeur TD-IDF == 0 
+# Appel de la fonction TF_IDF pour obtenir la matrice
 valeur_td_idf = TF_IDF("cleaned")
 L = []
+
+# On fait une boucle où i va aller piocher des tuples des cles et des valeurs de la liste 
 for i in valeur_td_idf.items():
     occurence = 0
+    # On va ensuite compter le nombre de 0, pour savoir si ce mot à un TD-IDF = 0 dans tous les fichiers
     for zero in i:
         if zero == 0:
             occurence += 1
         else:
             break
+        # si on a des valeurs TD-IDF dans tous les fichiers pour ce mot, il est alors ajouter à la liste.
         if occurence == 8:
             L.append(i[0])
 print(L)
 
-#Question 5 Affichage valeur TD-IDF == 8 
-valeur_td_idf = TF_IDF("cleaned")
-L = []
-for i in valeur_td_idf.items():
-    occurence = 0
-    if (zero in i[1]) == False : 
-        L.append(i[0])
-print(L)
+#####################################################
+### Question 2  mot avec le TD-IDF le plus élevé ###
+####################################################
 
-# Indiquer le mot le plus utilisé par le predident chirac
+Liste_tf_idf_eleve = []
+for i in res.items():
+    nb = 0
+    for values in i[1]:
+        nb += values
+    Liste_tf_idf_eleve.append(i[0])
+print("le(s) mot(s) ayant le score TF-IDF le plus élevé sont ", min(Liste_tf_idf_eleve))
+
+
+#############################################################################
+### Question 3   Indiquer le mot le plus utilisé par le predident chirac ###
+############################################################################
+
+# On crée une fonction pour trouver le(s) mot(s) le(s) plus répété(s) par le président Chirac
 def indiquer_le_mot_plus_utilise(president):
 
     # On donne le chemin pour acceder au fichier qui contiennent le nom du president recherche
-    directory = './cleaned' # "/Users/enzojuzyna/Downloads/projet/speeches"    
+    directory = './cleaned'  
     files_names = list_of_files(directory, "txt")
     
-    # On créera un liste max qui prendra pour valeur le mot avec le plus d'occurences, on l'initialise à 0
+    # On créera un liste max qui prendra pour valeur le mot avec le plus d'occurences, on l'initialise à 0, 0. car on mettra en premier
+    # le mot puis son occurence
     max = [0, 0]
     contenu = ""
+    
+    # On fait une boucle des fichiers pour obtenir le contenu (chaine de caractère) de tous les fichiers réunis qui correspondent 
+    # à ceux dont l'auteur est Chirac.
     for i in files_names:
         if president in i:
             with open (directory + '/'+ i, 'r') as fichier:
                 contenu += fichier.read() + " "
+    
+    # On utilise la fonction TF qui correspond à occurences_chaines(chaine) pour avoir un dico de chaque mot et de leur occurence
     dico = occurences_chaines(contenu)
     for a in dico.items():
+        # on cherche le mot avec la plus grande occurence et on l'ajoutera dans max
         if max[1] < a[1] and a[0] != '':
             max = a
 
+    # on verfie si il y a plusieurs mots qui ont la même occurence que max, si oui on les ajoutera dans la liste 
     liste_mot = [max]
     for j in dico.items():
         if max[1] == j[1]:
@@ -274,25 +295,36 @@ def indiquer_le_mot_plus_utilise(president):
                 liste_mot.append(j[0])
     return liste_mot
 
-print(indiquer_le_mot_plus_utilise("Chirac")) 
+print(indiquer_le_mot_plus_utilise("Chirac"))
 
-#President qui ont parlé de la Nation:
 
-# On donne le chemin pour acceder au fichier qui contiennent le nom du president recherche
-directory = './speeches' # "/Users/enzojuzyna/Downloads/projet/speeches"    
-files_names = list_of_files(directory, "txt")
-    
-# On créera un liste max qui prendra pour valeur le mot avec le plus d'occurences, on l'initialise à 0
-liste_president = []
-for i in files_names:
-    with open (directory + '/'+ i, 'r') as fichier:
+################################################################################
+### 5. Indiquer le premier président à parler du climat et/ou de l’écologie ###
+###############################################################################
+
+listes_president = []
+dico_climat_eco = {}
+
+for i in list_of_files("cleaned", "txt"):
+    with open("./cleaned/{}".format(i), 'r') as fichier:
         contenu = fichier.read()
-    if "Nation" in contenu or "nation" in contenu:
-        liste_president.append(i[11:-4])
+        texte_mot_cleaned = contenu.split()
+        nom_president = (i[11:-4])
+        for index in range(len(texte_mot_cleaned)):
+            if texte_mot_cleaned[index] == "climat" or texte_mot_cleaned[index] == "écologie":
+                if not nom_president in dico_climat_eco.keys():
+                    dico_climat_eco[nom_president] = index
 
-set_president = set()
-for i in extract_president_names(files_names):
-    if i in liste_president:
-        set_president.add(i)
-            
-print(set_president)
+min_key = min(dico_climat_eco, key=dico_climat_eco.get)
+print("Le premier président à parler du climat et/ou de l’écologie est", min_key)
+
+#############################################################
+### 6. le(s) mot(s) que tous les présidents ont évoqués. ###
+############################################################
+
+mots_evoque = []
+for score in res:
+    if min(score) != 0:
+        mots_evoque.append(score)
+print("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
+
