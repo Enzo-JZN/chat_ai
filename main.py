@@ -173,36 +173,57 @@ a = IDF_par_fichier("cleaned")
 
 #Fonction TF_IDF 
 
+#Fonction TF_IDF 
+
 def TF_IDF(repertoire):
+    # Initialisation d'un dictionnaire pour stocker la matrice TF-IDF, d'un dico pour recevoir la valeur de chaque mot et son idf, 
+    # ansi la récuparation du chemin et de la liste des noms du fichier
     matrice_TF_IDF = {}
     dico_IDF = IDF_par_fichier(repertoire)
-    directory = './{}'.format(repertoire) # "/Users/enzojuzyna/Downloads/projet/speeches"    
+    directory = './{}'.format(repertoire)   
     files_names = list_of_files(directory, "txt")
-    # print(file_names)
+
+    # On fait une boucle sur chaque mot du dictionnaire 
     for mot in list(dico_IDF.keys()):
-        score_tf_idf = []
+        resultat_TF_IDF = []
+
+        # on fait une seconde boulce sur le nom des fichiers
         for i in files_names:
             
+            # Ouverture du fichier en mode lecture 
             with open("./cleaned/{}".format(i), "r") as fichier1:
+
+                # On cherche à obtenir une liste de tous les mots
                 texte1 = fichier1.read()
                 contenu_mot = texte1.split()
 
-            score_TF_valeur = 0
+            valeur_TF = 0
+            # Vérification si le mot est présent dans le contenu du fichier, pout optimiser, gagner en vitesse, si le mot n'est pas 
+            # dans la liste, on ne cherche pas à chercher à l'occurence
             if (mot in contenu_mot) == True:
                 # Fonction TF nn optimisée trop longue, changement de méthode
-                # score_TF = occurences_chaines(texte1)
-                # score_TF_valeur = score_TF[mot]
+                # valeur_TF = occurences_chaines(texte1)
+                # valeur_TF_valeur = resultat_TF_IDF[mot]
                 for i in contenu_mot:
                     if mot == i:
-                        score_TF_valeur += 1
+                        valeur_TF += 1
+           
+            # Si mot pas dans le contenue, alors son TF = 0           
             else : 
-                score_TF_valeur = 0
-            score_tf_idf.append(score_TF_valeur * dico_IDF[mot])
-        matrice_TF_IDF[mot] = score_tf_idf
+                valeur_TF = 0
+
+            # On calcul TF_IDF, en multipliant la valeur TF par son IDF
+            resultat_TF_IDF.append(valeur_TF * dico_IDF[mot])
+
+        # On l'ajoute dans la matrice qu'on a décidé de définir sous forme de dictionnaire.
+        matrice_TF_IDF[mot] = resultat_TF_IDF
     # print(len(matrice_TF_IDF))
     return matrice_TF_IDF
 
-print(TF_IDF("cleaned"))
+# On teste la fonction avec le répertoire cleaned.
+res = TF_IDF("cleaned")
+print(res)
+
 
 #Question 2 Affichage valeur TD-IDF == 0 
 valeur_td_idf = TF_IDF("cleaned")
