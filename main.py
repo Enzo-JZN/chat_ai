@@ -173,7 +173,7 @@ a = IDF_par_fichier("cleaned")
 
 #Fonction TF_IDF 
 
-def TF_IDF1(repertoire):
+def TF_IDF(repertoire):
     matrice_TF_IDF = {}
     dico_IDF = IDF_par_fichier(repertoire)
     directory = './{}'.format(repertoire) # "/Users/enzojuzyna/Downloads/projet/speeches"    
@@ -202,10 +202,10 @@ def TF_IDF1(repertoire):
     # print(len(matrice_TF_IDF))
     return matrice_TF_IDF
 
-print(TF_IDF1("cleaned"))
+print(TF_IDF("cleaned"))
 
 #Question 2 Affichage valeur TD-IDF == 0 
-valeur_td_idf = TD_IDF1("cleaned")
+valeur_td_idf = TF_IDF("cleaned")
 L = []
 for i in valeur_td_idf.items():
     occurence = 0
@@ -219,7 +219,7 @@ for i in valeur_td_idf.items():
 print(L)
 
 #Question 5 Affichage valeur TD-IDF == 8 
-valeur_td_idf = TD_IDF1("cleaned")
+valeur_td_idf = TF_IDF("cleaned")
 L = []
 for i in valeur_td_idf.items():
     occurence = 0
