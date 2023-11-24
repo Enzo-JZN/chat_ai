@@ -13,7 +13,7 @@ def list_of_files(directory, extension):
 # Call of the function
 directory = "./speeches"
 files_names = list_of_files(directory, "txt")
-print(files_names)
+# print(files_names)
 print()
 
 
@@ -46,7 +46,7 @@ def extract_president_names(file):
     return liste
 
 
-print(extract_president_names(files_names))
+# print(extract_president_names(files_names))
 
 # Associer à chaque président un prénom
 dico = {"Giscard dEstaing": "Valéry", "Macron": "Emmanuelle", "Mitterrand": "François", "Sarkozy": "Nicolas",
@@ -57,10 +57,10 @@ def president_prenom(x):
     return (dico[x])
 
 
-print(president_prenom("Macron"))
+# print(president_prenom("Macron"))
 
 # Afficher la liste des noms des présidents (attention aux doublons) ;
-print(extract_president_names(files_names))
+# print(extract_president_names(files_names))
 
 
 # convertir texte en miniscules + creation repertoire cleaned + copier contenue dans le nouveau repertoire
@@ -237,7 +237,7 @@ def TF_IDF(repertoire):
 
 # On teste la fonction avec le répertoire cleaned.
 res = TF_IDF("cleaned")
-print(res)
+# print(res)
 
 ###############################################
 ### Question 1 Affichage valeur TF-IDF == 0 ###
@@ -262,7 +262,7 @@ def calcul_mot_dit_nn_important():
             if occurence == 8:
                 L.append(i[0])
     return(L)
-print(calcul_mot_dit_nn_important())
+# print(calcul_mot_dit_nn_important())
 
 #Partie 2
 # 1 Afficher la liste des mots les moins importants dans le corpus de documents.
@@ -274,7 +274,7 @@ for i in res.items():
         nb += values
     if nb <= 0.5:
         liste_mot_non_important.append(i[0])
-print("la liste des mots les moins importants dans le corpus du documents sont: ", liste_mot_non_important)
+# print("la liste des mots les moins importants dans le corpus du documents sont: ", liste_mot_non_important)
 
     
 #############################################################################
@@ -299,7 +299,7 @@ def score_IDF_eleve():
         if a[1] == max[1] and a[0] != max[0] :
             liste_mot_iDF_egaux.append(a[0])
     return liste_mot_iDF_egaux
-print(score_IDF_eleve())
+# print(score_IDF_eleve())
 
 ###########################################################################
 ### Question 3 Indiquer le mot le plus utilisé par le predident chirac ###
@@ -339,7 +339,7 @@ def indiquer_le_mot_plus_utilise(president):
                 liste_mot.append(j[0])
     return liste_mot
 
-print(indiquer_le_mot_plus_utilise("Chirac"))
+# print(indiquer_le_mot_plus_utilise("Chirac"))
 
 ################################################################
 ### Question 4 les présidents ayant abordé le thème nation. ###
@@ -389,6 +389,7 @@ def president_nation():
 
     # Affichage
     return ("Les presidents qui ont répété le mot « Nation » sont",  listes_president, "et celui qui l'a repete le plus de fois est :",max_occ_nation[0] )
+# print(president_nation())
 
 ################################################################################
 ### 5. Indiquer le premier président à parler du climat et/ou de l’écologie ###
@@ -409,7 +410,7 @@ def climat_president():
 
     min_key = min(dico_climat_eco, key=dico_climat_eco.get)
     return ("Le premier président à parler du climat et/ou de l’écologie est", min_key)
-print(climat_president())
+# print(climat_president())
 
 #############################################################
 ### 6. le(s) mot(s) que tous les présidents ont évoqués. ###
@@ -421,4 +422,4 @@ def mot_evoque():
         if min(res[score]) != 0:
             mots_evoque.append(score)
     return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
-print(mot_evoque())
+# print(mot_evoque())
