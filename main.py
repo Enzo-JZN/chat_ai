@@ -178,8 +178,7 @@ def TF_IDF1(repertoire):
     dico_IDF = IDF_par_fichier(repertoire)
     directory = './{}'.format(repertoire) # "/Users/enzojuzyna/Downloads/projet/speeches"    
     files_names = list_of_files(directory, "txt")
-    premiere_colonnes = ["Mot"] + files_names
-    print(premiere_colonnes)
+    # print(file_names)
     for mot in list(dico_IDF.keys()):
         score_tf_idf = []
         for i in files_names:
@@ -200,7 +199,7 @@ def TF_IDF1(repertoire):
                 score_TF_valeur = 0
             score_tf_idf.append(score_TF_valeur * dico_IDF[mot])
         matrice_TF_IDF[mot] = score_tf_idf
-    print(len(matrice_TF_IDF))
+    # print(len(matrice_TF_IDF))
     return matrice_TF_IDF
 
 print(TF_IDF1("cleaned"))
