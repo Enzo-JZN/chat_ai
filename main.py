@@ -240,14 +240,16 @@ res = TF_IDF("cleaned")
 print(res)
 
 ###############################################
-### Question 1 Affichage valeur TD-IDF == 0 ###
+### Question 1 Affichage valeur TF-IDF == 0 ###
 ###############################################
-def TF_IDF_NUL():
-# Appel de la fonction TF_IDF pour obtenir la matrice
+
+#Partie 1
+def calcul_mot_dit_nn_important():
+    # Appel de la fonction TF_IDF pour obtenir la matrice
     valeur_td_idf = TF_IDF("cleaned")
     L = []
 
-    # On fait une boucle où i va aller piocher des tuples des cles et des valeurs de la liste
+    # On fait une boucle où i va aller piocher des tuples des cles et des valeurs de la liste 
     for i in valeur_td_idf.items():
         occurence = 0
         # On va ensuite compter le nombre de 0, pour savoir si ce mot à un TD-IDF = 0 dans tous les fichiers
@@ -259,28 +261,53 @@ def TF_IDF_NUL():
             # si on a des valeurs TD-IDF dans tous les fichiers pour ce mot, il est alors ajouter à la liste.
             if occurence == 8:
                 L.append(i[0])
-    print(L)
-    return
-#####################################################
-### Question 2  mot avec le TD-IDF le plus élevé ###
-####################################################
+    return(L)
+print(calcul_mot_dit_nn_important())
 
-def TF_IDF_HIGH():
-    Liste_tf_idf_eleve = []
+#Partie 2
+# 1 Afficher la liste des mots les moins importants dans le corpus de documents.
+liste_mot_non_important = []
+dico_moyenne = {}
+for i in res.items():
+    nb = 0
+    for values in i[1]:
+        nb += values
+    if nb <= 0.5:
+        liste_mot_non_important.append(i[0])
+print("la liste des mots les moins importants dans le corpus du documents sont: ", liste_mot_non_important)
+
+    
+#############################################################################
+### Question 2 Afficher le(s) mot(s) ayant le score TD-IDF le plus élevé ###
+############################################################################
+
+
+def score_IDF_eleve():
+    liste = []
     for i in res.items():
         nb = 0
         for values in i[1]:
             nb += values
-        Liste_tf_idf_eleve.append(i[0])
-    print("le(s) mot(s) ayant le score TF-IDF le plus élevé sont ", min(Liste_tf_idf_eleve))
-    return
+        liste.append([i[0], nb])
+    max = ["", 0]
+    for a in liste:
+        if max[1] < a[1]:
+            max = a
 
-#############################################################################
-### Question 3   Indiquer le mot le plus utilisé par le predident chirac ###
-############################################################################
+    liste_mot_iDF_egaux = [max[0]]
+    for a in liste:
+        if a[1] == max[1] and a[0] != max[0] :
+            liste_mot_iDF_egaux.append(a[0])
+    return liste_mot_iDF_egaux
+print(score_IDF_eleve())
+
+###########################################################################
+### Question 3 Indiquer le mot le plus utilisé par le predident chirac ###
+##########################################################################
 
 # On crée une fonction pour trouver le(s) mot(s) le(s) plus répété(s) par le président Chirac
 def indiquer_le_mot_plus_utilise(president):
+    
     # On donne le chemin pour acceder au fichier qui contiennent le nom du president recherche
     directory = './cleaned'
     files_names = list_of_files(directory, "txt")
@@ -312,12 +339,11 @@ def indiquer_le_mot_plus_utilise(president):
                 liste_mot.append(j[0])
     return liste_mot
 
-
 print(indiquer_le_mot_plus_utilise("Chirac"))
 
-########################################################
-### 4. les présidents ayant abordé le thème nation. ###
-########################################################
+################################################################
+### Question 4 les présidents ayant abordé le thème nation. ###
+###############################################################
 
 # liste de mots cleaned
 files_names_cleaned = list_of_files("./cleaned", "txt")
@@ -369,8 +395,7 @@ print("Les presidents qui ont répété le mot « Nation » sont",  listes_presi
 ### 5. Indiquer le premier président à parler du climat et/ou de l’écologie ###
 ###############################################################################
 
-def president_ecologie():
-    listes_president = []
+def climat_president():
     dico_climat_eco = {}
 
     for i in list_of_files("cleaned", "txt"):
@@ -384,15 +409,17 @@ def president_ecologie():
                         dico_climat_eco[nom_president] = index
 
     min_key = min(dico_climat_eco, key=dico_climat_eco.get)
-    print("Le premier président à parler du climat et/ou de l’écologie est", min_key)
-    return
+    return ("Le premier président à parler du climat et/ou de l’écologie est", min_key)
+print(climat_president())
+
 #############################################################
 ### 6. le(s) mot(s) que tous les présidents ont évoqués. ###
 ############################################################
-def mot_globaux_presidents():
+
+def mot_evoque():
     mots_evoque = []
     for score in res:
-        if min(score) != 0:
+        if min(res[score]) != 0:
             mots_evoque.append(score)
-    print("le(s) mot(s) que tous les présidents ont évoqués sont:", mots_evoque)
-    return
+    return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
+print(mot_evoque())
