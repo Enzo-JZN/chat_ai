@@ -26,7 +26,7 @@ def menu():
     elif choice == "5":
         print(president_ecologie())
     elif choice == "6":
-        mot_globaux_présidents()
+        mot_globaux_presidents()
     elif choice == "Q":
         print("Au revoir.")
 
