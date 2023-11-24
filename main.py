@@ -205,6 +205,29 @@ def TF_IDF1(repertoire):
 
 print(TF_IDF1("cleaned"))
 
+#Question 2 Affichage valeur TD-IDF == 0 
+valeur_td_idf = TD_IDF1("cleaned")
+L = []
+for i in valeur_td_idf.items():
+    occurence = 0
+    for zero in i:
+        if zero == 0:
+            occurence += 1
+        else:
+            break
+        if occurence == 8:
+            L.append(i[0])
+print(L)
+
+#Question 5 Affichage valeur TD-IDF == 8 
+valeur_td_idf = TD_IDF1("cleaned")
+L = []
+for i in valeur_td_idf.items():
+    occurence = 0
+    if (zero in i[1]) == False : 
+        L.append(i[0])
+print(L)
+
 # Indiquer le mot le plus utilisé par le predident chirac
 def indiquer_le_mot_plus_utilise(president):
 
