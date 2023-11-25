@@ -414,24 +414,49 @@ def president_nation():
 ### 5. Indiquer le premier président à parler du climat et/ou de l’écologie ###
 ###############################################################################
 
-def climat_president():
-    dico_climat_eco = {}
+# Dictionnaire brut avec les noms des présidents et leurs dates d'élection
+presidents_et_dates = {
+    "Giscard dEstaing": 1974,
+    "Mitterrand": 1981,
+    "Chirac": 1995,
+    "Sarkozy": 2007,
+    "Hollande": 2012,
+    "Macron": 2017
+}
 
-    for i in list_of_files("cleaned", "txt"):
+def climat_president():
+    files_names = list_of_files("./cleaned", "txt")
+    liste_president = []
+
+    for i in files_names : 
         with open("./cleaned/{}".format(i), 'r') as fichier:
             contenu = fichier.read()
             texte_mot_cleaned = contenu.split()
             nom_president = (i[11:-4])
-            for index in range(len(texte_mot_cleaned)):
-                if texte_mot_cleaned[index] == "climat" or texte_mot_cleaned[index] == "écologie":
-                    if not nom_president in dico_climat_eco.keys():
-                        dico_climat_eco[nom_president] = index
+             # Si le nom président du président fini par un chiffre, on supprime alors ce chiffre
+            nom_president = (i[11:-4])
+            if nom_president[-1] >= chr(48) and nom_president[-1] <= chr(57):
+                nom_president = nom_president[:-1]
 
-    min_key = min(dico_climat_eco, key=dico_climat_eco.get)
-    return ("Le premier président à parler du climat et/ou de l’écologie est", min_key)
+            if ("ecologie" in texte_mot_cleaned) or ("climat" in texte_mot_cleaned) or ("réchauffement" in texte_mot_cleaned) :
+                
+                if not (nom_president in liste_president):
+                    liste_president.append(nom_president)
+        
+    if liste_president == []:
+        return "aucun"
+    elif len(liste_president) == 1:
+        return liste_president[0]
+    else:
+        minimum = 999999999999999999
+        for i in liste_president:
+            if minimum > presidents_et_dates[i]:
+                minimum=presidents_et_dates[i]
+                president = i
+        return "Le president ayant parlé en premier du climat / ecologie est M." + president
 
 
-# print(climat_president())
+print(climat_president())
 
 #############################################################
 ### 6. le(s) mot(s) que tous les présidents ont évoqués. ###
