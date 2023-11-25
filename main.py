@@ -129,7 +129,7 @@ def occurences_chaines(chaine):
     # On fait une boucle pour obtenir tous les indices où se trouvent de signes de ponctuation
     for i in range(len(chaine)):
         if (ord(chaine[i]) >= 21 and ord(chaine[i]) <= 47) or (ord(chaine[i]) >= 58 and ord(chaine[i]) <= 64) or (
-        chaine[i]) == "\n":
+                chaine[i]) == "\n":
             indice.append(i)
 
     # On utlisera les indices precedemment acquis pour effectuer des slides dans la chaine de caractere initial et
@@ -237,19 +237,21 @@ def TF_IDF(repertoire):
 
 # On teste la fonction avec le répertoire cleaned.
 res = TF_IDF("cleaned")
+
+
 # print(res)
 
 ###############################################
 ### Question 1 Affichage valeur TF-IDF == 0 ###
 ###############################################
 
-#Partie 1
+# Partie 1
 def calcul_mot_dit_nn_important():
     # Appel de la fonction TF_IDF pour obtenir la matrice
     valeur_td_idf = TF_IDF("cleaned")
     L = []
 
-    # On fait une boucle où i va aller piocher des tuples des cles et des valeurs de la liste 
+    # On fait une boucle où i va aller piocher des tuples des cles et des valeurs de la liste
     for i in valeur_td_idf.items():
         occurence = 0
         # On va ensuite compter le nombre de 0, pour savoir si ce mot à un TD-IDF = 0 dans tous les fichiers
@@ -261,10 +263,12 @@ def calcul_mot_dit_nn_important():
             # si on a des valeurs TD-IDF dans tous les fichiers pour ce mot, il est alors ajouter à la liste.
             if occurence == 8:
                 L.append(i[0])
-    return(L)
+    return (L)
+
+
 # print(calcul_mot_dit_nn_important())
 
-#Partie 2
+# Partie 2
 # 1 Afficher la liste des mots les moins importants dans le corpus de documents.
 def mot_moins_important():
     liste_mot_non_important = []
@@ -276,28 +280,42 @@ def mot_moins_important():
             liste_mot_non_important.append(i[0])
     return ("la liste des mots les moins importants dans tous les documents sont: ", liste_mot_non_important)
 
+
 #############################################################################
 ### Question 2 Afficher le(s) mot(s) ayant le score TD-IDF le plus élevé ###
 ############################################################################
 
 
 def score_IDF_eleve():
+
+    #Initialisation d'une liste pour stocker les mots et leurs valeur TF_IDF
     liste = []
+
+    #Parcours la matrice TF_IDF
     for i in res.items():
         nb = 0
+        #Calcul la somme des scores TF_IDF et les ajoutes à la liste
         for values in i[1]:
             nb += values
         liste.append([i[0], nb])
+    #Stocke le mot avec le score le plus élévée
     max = ["", 0]
+
+    #Cherche le mot avec le score le plus élevé
     for a in liste:
         if max[1] < a[1]:
             max = a
 
+    #Initialise une liste si des mots on le meme score
+    #Puis cherche si des mots ont le meme score max et les ajoutent à la liste
     liste_mot_iDF_egaux = [max[0]]
     for a in liste:
-        if a[1] == max[1] and a[0] != max[0] :
+        if a[1] == max[1] and a[0] != max[0]:
             liste_mot_iDF_egaux.append(a[0])
+    #Renvoie les mots avec le score le plus élevé
     return liste_mot_iDF_egaux
+
+
 # print(score_IDF_eleve())
 
 ###########################################################################
@@ -306,7 +324,6 @@ def score_IDF_eleve():
 
 # On crée une fonction pour trouver le(s) mot(s) le(s) plus répété(s) par le président Chirac
 def indiquer_le_mot_plus_utilise(president):
-    
     # On donne le chemin pour acceder au fichier qui contiennent le nom du president recherche
     directory = './cleaned'
     files_names = list_of_files(directory, "txt")
@@ -338,6 +355,7 @@ def indiquer_le_mot_plus_utilise(president):
                 liste_mot.append(j[0])
     return liste_mot
 
+
 # print(indiquer_le_mot_plus_utilise("Chirac"))
 
 ################################################################
@@ -345,15 +363,14 @@ def indiquer_le_mot_plus_utilise(president):
 ###############################################################
 
 def president_nation():
-
     # Initialisation d'une liste et d'un dico
     listes_president = []
     dico_occ_nation = {}
 
-    # On fair une boucle où i prendra le nom des présidents et on utilisera ensuite read et split pour avoir une 
+    # On fair une boucle où i prendra le nom des présidents et on utilisera ensuite read et split pour avoir une
     # chaine et une liste des mots
     for i in files_names:
-        with open ("./cleaned/" + "/" + i, 'r') as fichier:
+        with open("./cleaned/" + "/" + i, 'r') as fichier:
             contenu = fichier.read()
             liste_mot = contenu.split()
 
@@ -361,23 +378,23 @@ def president_nation():
         nom_president = (i[11:-4])
         if nom_president[-1] >= chr(48) and nom_president[-1] <= chr(57):
             nom_president = nom_president[:-1]
-        
+
         # On verfie la presence du mot "nation" à l'interieur de la liste
         if "nation" in liste_mot:
 
             # On utilsie la foncton TF pour avoir un dico de chaque mot et de leur occurence.
             dico_mot_fichier = occurences_chaines(contenu)
 
-            #On ajoute le nom du president dans la liste s'il n'est pas déja present
-            if not(nom_president in listes_president):
+            # On ajoute le nom du president dans la liste s'il n'est pas déja present
+            if not (nom_president in listes_president):
                 listes_president.append(nom_president)
 
-            #On cherche leur occurence dans le dico initial et on l'ajoute à la valeur actuelle
+            # On cherche leur occurence dans le dico initial et on l'ajoute à la valeur actuelle
             if (nom_president in dico_occ_nation.keys()):
                 dico_occ_nation[nom_president] += dico_mot_fichier["nation"]
 
             # Si president n'est pas une clé du dico, alors on la met et on definit sa valeur
-            if not(nom_president in dico_occ_nation.keys()):
+            if not (nom_president in dico_occ_nation.keys()):
                 dico_occ_nation[nom_president] = dico_mot_fichier["nation"]
 
         # On cherche à obtenir l'occurence max et celui qui est à l'origine de cette parole
@@ -387,7 +404,10 @@ def president_nation():
                 max_occ_nation = i
 
     # Affichage
-    return ("Les presidents qui ont répété le mot « Nation » sont",  listes_president, "et celui qui l'a repete le plus de fois est :",max_occ_nation[0] )
+    return ("Les presidents qui ont répété le mot « Nation » sont", listes_president,
+            "et celui qui l'a repete le plus de fois est :", max_occ_nation[0])
+
+
 # print(president_nation())
 
 ################################################################################
@@ -409,6 +429,8 @@ def climat_president():
 
     min_key = min(dico_climat_eco, key=dico_climat_eco.get)
     return ("Le premier président à parler du climat et/ou de l’écologie est", min_key)
+
+
 # print(climat_president())
 
 #############################################################
@@ -416,12 +438,41 @@ def climat_president():
 ############################################################
 
 def mot_evoque():
+    #On crée une boucle pour stocker les mots dit par tous les présidents
     mots_evoque = []
+
+    #On fait une boucle sur les mots de la matrice TF_IDF
+    #Si le mots a un score minimum dans tous les discours est différent de 0 alors on l'ajoute à la liste
     for score in res:
         if min(res[score]) != 0:
             mots_evoque.append(score)
-    return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
+    #on revoit le(s) mot(s) que tous les présidents ont évoqués
+    return ("le(s) mot(s) que tous les présidents ont évoqués sont:", mots_evoque)
+
+
 # print(mot_evoque())
+
+# Dictionnaire brut avec les noms des présidents et leurs dates d'élection
+presidents_et_dates = {
+    "Giscard dEstaing": "1974",
+    "Mitterrand": "1981",
+    "Chirac": "1995",
+    "Sarkozy": "2007",
+    "Hollande": "2012",
+    "Macron": "2017"
+}
+
+# Dictionnaire brut avec les noms des présidents et leurs dates de discours d'investitures
+president_date_dicours = {
+    "Chirac1": "17 mai 1995",
+    "Chirac2": "16 mai 2002",
+    "Giscard dEstaing": "27 mai 1974",
+    "Hollande": "15 mai 2012",
+    'Macron': "14 mai 2017",
+    "Mitterrand1": "21 mai 1981",
+    "Mitterrand2": "21 mai 1988",
+    "Sarkozy": "16 mai 2007"
+}
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
