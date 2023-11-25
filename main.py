@@ -474,30 +474,5 @@ def mot_evoque():
     #on revoit le(s) mot(s) que tous les présidents ont évoqués
     return ("le(s) mot(s) que tous les présidents ont évoqués sont:", mots_evoque)
 
-
-# print(mot_evoque())
-
-# Dictionnaire brut avec les noms des présidents et leurs dates d'élection
-presidents_et_dates = {
-    "Giscard dEstaing": "1974",
-    "Mitterrand": "1981",
-    "Chirac": "1995",
-    "Sarkozy": "2007",
-    "Hollande": "2012",
-    "Macron": "2017"
-}
-
-# Dictionnaire brut avec les noms des présidents et leurs dates de discours d'investitures
-president_date_dicours = {
-    "Chirac1": "17 mai 1995",
-    "Chirac2": "16 mai 2002",
-    "Giscard dEstaing": "27 mai 1974",
-    "Hollande": "15 mai 2012",
-    'Macron': "14 mai 2017",
-    "Mitterrand1": "21 mai 1981",
-    "Mitterrand2": "21 mai 1988",
-    "Sarkozy": "16 mai 2007"
-}
-
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
