@@ -115,8 +115,8 @@ def supprimer_ponctuation():
             fichier_modifie.write(contenu1)
 
 
-print(convertir_textes_miniscules())
-print(supprimer_ponctuation())
+convertir_textes_miniscules()
+supprimer_ponctuation()
 
 
 # Écrire une fonction qui prend en paramètre une chaine de caractères et qui retourne un dictionnaire
