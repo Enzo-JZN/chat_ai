@@ -287,32 +287,31 @@ def mot_moins_important():
 
 
 def score_IDF_eleve():
-
-    #Initialisation d'une liste pour stocker les mots et leurs valeur TF_IDF
+    # Initialisation d'une liste pour stocker les mots et leurs valeur TF_IDF
     liste = []
 
-    #Parcours la matrice TF_IDF
+    # Parcours la matrice TF_IDF
     for i in res.items():
         nb = 0
-        #Calcul la somme des scores TF_IDF et les ajoutes à la liste
+        # Calcul la somme des scores TF_IDF et les ajoutes à la liste
         for values in i[1]:
             nb += values
         liste.append([i[0], nb])
-    #Stocke le mot avec le score le plus élévée
+    # Stocke le mot avec le score le plus élévée
     max = ["", 0]
 
-    #Cherche le mot avec le score le plus élevé
+    # Cherche le mot avec le score le plus élevé
     for a in liste:
         if max[1] < a[1]:
             max = a
 
-    #Initialise une liste si des mots on le meme score
-    #Puis cherche si des mots ont le meme score max et les ajoutent à la liste
+    # Initialise une liste si des mots on le meme score
+    # Puis cherche si des mots ont le meme score max et les ajoutent à la liste
     liste_mot_iDF_egaux = [max[0]]
     for a in liste:
         if a[1] == max[1] and a[0] != max[0]:
             liste_mot_iDF_egaux.append(a[0])
-    #Renvoie les mots avec le score le plus élevé
+    # Renvoie les mots avec le score le plus élevé
     return liste_mot_iDF_egaux
 
 
@@ -424,55 +423,72 @@ presidents_et_dates = {
     "Macron": 2017
 }
 
+# La fonction suivante recherche le président qui a abordé en premier les sujets liés au climat, à l'écologie
+# ou au réchauffement dans les discours.
+
 def climat_president():
+    # Obtient la liste des noms de fichiers dans le répertoire "cleaned"
     files_names = list_of_files("./cleaned", "txt")
     liste_president = []
 
-    for i in files_names : 
+    # Parcourt chaque fichier, lit et divise chaque fichier en mots
+    for i in files_names:
         with open("./cleaned/{}".format(i), 'r') as fichier:
             contenu = fichier.read()
             texte_mot_cleaned = contenu.split()
+            # Obtient le nom du président à partir du nom du fichier
             nom_president = (i[11:-4])
-             # Si le nom président du président fini par un chiffre, on supprime alors ce chiffre
-            nom_president = (i[11:-4])
+
+            # Si le nom président se termine par un chiffre, supprime ce chiffre
             if nom_president[-1] >= chr(48) and nom_president[-1] <= chr(57):
                 nom_president = nom_president[:-1]
 
-            if ("ecologie" in texte_mot_cleaned) or ("climat" in texte_mot_cleaned) or ("réchauffement" in texte_mot_cleaned) :
-                
+            # Vérifie si des termes liés au climat, à l'écologie ou au réchauffement sont présents dans le texte
+            if ("ecologie" in texte_mot_cleaned) or ("climat" in texte_mot_cleaned) or (
+                    "réchauffement" in texte_mot_cleaned):
+
+                # Ajoute le nom du président à la liste s'il a parlé de l'écologie et s'il n'est pas déjà présent
                 if not (nom_president in liste_president):
                     liste_president.append(nom_president)
-        
+    
+    #On met un choix multiple pour couvrir toutes les options
+    # Si aucun président n'a abordé ces sujets, retourne "aucun"
     if liste_president == []:
         return "aucun"
+    # Si un seul président a abordé ces sujets, retourne son nom
     elif len(liste_president) == 1:
         return liste_president[0]
+    # Si plusieurs présidents ont abordé ces sujets, trouve celui qui a parlé en premier
     else:
         minimum = 999999999999999999
         for i in liste_president:
+            # Recherche le président avec le discours le plus ancien sur ces sujets
             if minimum > presidents_et_dates[i]:
-                minimum=presidents_et_dates[i]
+                minimum = presidents_et_dates[i]
                 president = i
-        return "Le president ayant parlé en premier du climat / ecologie est M." + president
+        return "Le président ayant parlé en premier du climat/écologie est M." + president
 
-
+# Appelle la fonction et imprime le résultat
 print(climat_president())
+
+
 
 #############################################################
 ### 6. le(s) mot(s) que tous les présidents ont évoqués. ###
 ############################################################
 
 def mot_evoque():
-    #On crée une boucle pour stocker les mots dit par tous les présidents
+    # On crée une boucle pour stocker les mots dit par tous les présidents
     mots_evoque = []
 
-    #On fait une boucle sur les mots de la matrice TF_IDF
-    #Si le mots a un score minimum dans tous les discours est différent de 0 alors on l'ajoute à la liste
+    # On fait une boucle sur les mots de la matrice TF_IDF
+    # Si le mots a un score minimum dans tous les discours est différent de 0 alors on l'ajoute à la liste
     for score in res:
         if min(res[score]) != 0:
             mots_evoque.append(score)
-    #on revoit le(s) mot(s) que tous les présidents ont évoqués
+    # on revoit le(s) mot(s) que tous les présidents ont évoqués
     return ("le(s) mot(s) que tous les présidents ont évoqués sont:", mots_evoque)
+
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
