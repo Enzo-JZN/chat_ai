@@ -44,15 +44,15 @@ def menu():
         else:
             print("Au revoir.")
             return
-
-    # On propose à l'utilisateur d'essayer une autre possibilité
-    encore = input("Voulez-vous essayer une autre possibilité ?:\n"
-                   "- Tapez 1 pour Oui\n"
-                   "- Tapez 2 pour Non\n")
-    if encore == "1":
-        menu()
-    else:
-        print("Au revoir.")
+    if choice != 'Q':
+        # On propose à l'utilisateur d'essayer une autre possibilité sauf s'il voulait quitter
+        encore = input("Voulez-vous essayer une autre possibilité ?:\n"
+                       "- Tapez 1 pour Oui\n"
+                       "- Tapez 2 pour Non\n")
+        if encore == "1":
+            menu()
+        else:
+            print("Au revoir.")
         return
 
 
