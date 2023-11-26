@@ -1,6 +1,7 @@
 import os
 import math
 
+
 def list_of_files(directory, extension):
     files_names = []
     for filename in os.listdir(directory):
@@ -128,7 +129,7 @@ def occurences_chaines(chaine):
     # On fait une boucle pour obtenir tous les indices où se trouvent de signes de ponctuation
     for i in range(len(chaine)):
         if (ord(chaine[i]) >= 21 and ord(chaine[i]) <= 47) or (ord(chaine[i]) >= 58 and ord(chaine[i]) <= 64) or (
-                chaine[i]) == "\n" or chaine[i] == "'":
+                chaine[i]) == "\n":
             indice.append(i)
 
     # On utlisera les indices precedemment acquis pour effectuer des slides dans la chaine de caractere initial et
