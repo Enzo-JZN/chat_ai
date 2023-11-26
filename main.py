@@ -464,7 +464,7 @@ def climat_president():
         return "Le président ayant parlé en premier du climat/écologie est M." + president
 
 # Appelle la fonction et imprime le résultat
-print(climat_president())
+# print(climat_president())
 
 #############################################################
 ### 6. le(s) mot(s) que tous les présidents ont évoqués. ###
