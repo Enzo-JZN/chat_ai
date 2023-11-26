@@ -1,4 +1,4 @@
-# CHAT AI 
+# CHAT AI
 
 ## Introduction
 Ce projet a pour objectif d'analyser des textes afin de répondre à des questions spécifiques, il vise à nous familiariser avec les concepts fondamentaux du traitement de texte. Il vise également à nous aider à comprendre l'une des méthodes utilisées dans le développement de chatbots et/ou d'intelligences artificielles génératives telles que ChatGPT. Il est important de souligner que ce projet ne traite pas de la manipulation de réseaux de neurones. Au contraire, il se concentre sur une méthode basée sur le nombre d'occurrences des mots pour générer des réponses à partir d'un corpus de textes.
@@ -28,3 +28,10 @@ Merci d'avoir utiliser ce programme
 - git clone https://github.com/Enzo-JZN/chat_ai
 - cd chat_ai
 - python3 menu.py
+
+## Membres de l'équipe : 
+
+Enzo Juzyna
+Lilian Cao
+
+
