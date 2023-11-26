@@ -82,12 +82,11 @@ def convertir_textes_miniscules():
         chemin_cleaned = directory_cleaned + "/" + i
         chemin_cleaned = directory_cleaned + "/" + i
 
-        # On crée le fichier copier, puis on copie le contenu du premier fichier et on le rajoute le tout en minuscule
-        with open(chemin_cleaned, "w", encoding="utf-8") as fichier:
-            chemin_original = directory + "/" + i
-            with open(chemin_original, "r", encoding="utf-8") as fichier_original:
-                contenu = fichier_original.read()
-                fichier.write(contenu.lower())
+        # On crée le fihcier copier, puis on copie le contenu du premier fihcier et on le rajoute le tout en miniscule
+        with open(chemin_cleaned, "w") as fichier:
+            fichier2 = open(directory + "/" + i, "r")
+            contenu = fichier2.read()
+            fichier.write(contenu.lower())
 
 
 def supprimer_ponctuation():
