@@ -10,9 +10,25 @@ Il est composé de deux programmes principaux:
 
 De plus il est important de noter que chaque fonction principale allant de 1 à 6 à sa propre branche sur github permettant une lisibilité plus claire du projet.
 
-## Principales fonctionnalités de votre application :
+## Principales fonctionnalités de votre application 
 
-....
+Afichage des mots moins importants :
+Programme qui extrait et affiche la liste des mots ayant un score TF-IDF égal à zéro dans tous les fichiers du corpus.
+
+Affichage du mot avec le score TF-IDF le plus élevé :
+Programme qui identifie et affiche le mot ayant le score TF-IDF le plus élevé parmi tous les fichiers du corpus.
+
+Mots les plus répétés par le président Chirac :
+Programme spécifique pour extraire et afficher les mots les plus fréquemment utilisés par le président Chirac.
+
+Président(s) parlant de la "Nation" et fréquence :
+Programme qui identifie le(s) président(s) ayant mentionné la "Nation" et affiche la fréquence à laquelle ce terme a été répété par chacun.
+
+Premier président à parler de climat/écologie :
+Programme qui localise le premier président à avoir abordé les thèmes du climat et/ou de l'écologie.
+
+Mots évoqués par tous les présidents (sauf non importants) :
+Programme qui, en excluant les mots considérés comme "non importants", identifie les mots communs à tous les présidents, lesquels ont été évoqués dans leurs discours.
 
 ## Attention
 Pour un bon fonctionnement du projet merci de vérifier que vous possédez bien le fichier speeches sur votre machine, cela permettra d'éviter une erreur.
