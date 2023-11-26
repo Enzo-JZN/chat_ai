@@ -55,9 +55,6 @@ dico = {"Giscard dEstaing": "Valéry", "Macron": "Emmanuelle", "Mitterrand": "Fr
 def president_prenom(x):
     return (dico[x])
 
-
-# print(president_prenom("Macron"))
-
 # Afficher la liste des noms des présidents (attention aux doublons) ;
 # print(extract_president_names(files_names))
 
