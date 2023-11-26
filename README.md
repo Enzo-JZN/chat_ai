@@ -1,6 +1,4 @@
-# pychatbot-Juzyna-Cao-GroupeA
-
-## Modification des sources
+# CHAT AI 
 
 ## Introduction
 Ce projet a pour objectif d'analyser des textes afin de répondre à des questions spécifiques.
