@@ -1,4 +1,4 @@
-# pychatbot-Enzo_Juzyna-Lilian_Cao-GroupeA
+# pychatbot-Juzyna-Cao-GroupeA
 
 ## Modification des sources
 
