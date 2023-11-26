@@ -21,3 +21,9 @@ Ensuite suivez simplement cette affichage qui vous donnera les informations néc
 
 
 Merci d'avoir utiliser ce programme
+
+## Instruction d'éxecution du programme :
+
+git clone https://github.com/Enzo-JZN/chat_ai
+Cd chat_ai
+python3 menu.py
