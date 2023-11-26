@@ -44,4 +44,6 @@ Merci d'avoir utiliser ce programme
 Enzo Juzyna
 Lilian Cao
 
+## lien projet 
 
+https://github.com/Enzo-JZN/chat_ai
