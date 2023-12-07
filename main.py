@@ -488,4 +488,50 @@ def mot_evoque():
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
-    
+
+
+def tokenisation_question(question):
+    #On va d'abord mettre tous les termes de la question en minuscules
+    #Pour cela on crée une chaine de caractère vide où on va stocker les mots
+    question_minuscule = ''
+    #On fait une boucle pour vérifier chaque caractère de la question
+    for lettre in question:
+        #S'il est en majuscule, on le rajoute à la chaine de caractère après l'avoir passé en minuscule
+        if 65 <= ord(lettre) <= 90:
+            question_minuscule += chr(ord(lettre)+32)
+        #Sinon, on le rajoute telle quel
+        else:
+            question_minuscule += lettre
+
+
+    #On va maintenant enlever la ponctuation de la question
+    #On crée une chaine de caractère pour y mettre la question nettoyée
+    question_clean = ''
+    #On parcourt chaque caractère de la question
+    for caractere in question_minuscule:
+        #Si c'est une ponctuation on le remplace par un espace
+        if ((21 <=ord(caractere) <= 47) or (58 <= ord(caractere) <= 64) or (91<=ord(caractere)<=96)
+                or (123<=ord(caractere)<=126) or (caractere) == "\n"):
+            question_clean += ' '
+        #Sinon, on le rajoute telle quel
+        else:
+            question_clean += caractere
+
+    #On utilise la fonction split pour séparer tous les mots de la question et les mettre dans une liste
+    mot_question = question_clean.split()
+    return mot_question
+
+
+def mot_question_et_document(question):
+    #On crée une liste vide pour y stocker les mots présents à la fois dans la question et dans le document
+    mot_question_documents = []
+    #On appelle la fonction tokenisation pour avoir les mots présent dans la question
+    mot_question = tokenisation_question(question)
+    #On appelle la fonction IDF_par_fichier pour avoir le dico des mots présent dans le corpus de texte
+    mot_repertoire = IDF_par_fichier('cleaned')
+
+    #Pour chaque mot de la question on vérifie s'il est dans le corpus et si oui on l'ajoute dans la liste
+    for mot in mot_question:
+        if mot in mot_repertoire:
+            mot_question_documents.append(mot)
+    return mot_question_documents
