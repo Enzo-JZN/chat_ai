@@ -90,7 +90,7 @@ def supprimer_ponctuation():
     files_names = list_of_files(directory, "txt")
     # on fait une boucle qui ouvre chaque fichier du répertoire un par un et on met le texte dans une variable
     for nom_fichier in files_names:
-        with open(directory + "/" + nom_fichier, "r") as fichier:
+        with open(directory + "/" + nom_fichier, "r", encoding="utf-8") as fichier:
             contenu = fichier.read()
         indice = []
         # dans une liste on met toutes les positions où il y a un signe de ponctuations
@@ -106,7 +106,7 @@ def supprimer_ponctuation():
             contenu1 = contenu1 + contenu[n:i] + " "
             n = i + 1
         # reécrit le nouveau texte sans la ponctuation
-        with open(directory + "/" + nom_fichier, "w") as fichier_modifie:
+        with open(directory + "/" + nom_fichier, "w", encoding="utf-8") as fichier_modifie:
             fichier_modifie.write(contenu1)
 
 
@@ -158,7 +158,7 @@ def IDF_par_fichier(repertoire):
     contenu = ""
     liste_contenu = []
     for i in files_names:
-        with open(directory + '/' + i, 'r') as fichier_IDF:
+        with open(directory + '/' + i, 'r', encoding="utf-8") as fichier_IDF:
             contenu = fichier_IDF.read()
             contenu = contenu.split()
             liste_contenu += contenu
@@ -170,7 +170,7 @@ def IDF_par_fichier(repertoire):
     for mot in set_mot:
         occurence = 0
         for i in files_names:
-            with open(directory + '/' + i, 'r') as fichier_IDF:
+            with open(directory + '/' + i, 'r', encoding="utf-8") as fichier_IDF:
                 contenu = fichier_IDF.read()
                 if mot in contenu:
                     occurence += 1
@@ -200,7 +200,7 @@ def TF_IDF(repertoire):
         for i in files_names:
 
             # Ouverture du fichier en mode lecture
-            with open("./cleaned/{}".format(i), "r") as fichier1:
+            with open("./cleaned/{}".format(i), "r", encoding="utf-8") as fichier1:
 
                 # On cherche à obtenir une liste de tous les mots
                 contenu = fichier1.read()
@@ -330,7 +330,7 @@ def indiquer_le_mot_plus_utilise(president):
     # à ceux dont l'auteur est Chirac.
     for i in files_names:
         if president in i:
-            with open(directory + '/' + i, 'r') as fichier:
+            with open(directory + '/' + i, 'r', encoding="utf-8") as fichier:
                 contenu += fichier.read() + " "
 
     # On utilise la fonction TF qui correspond à occurences_chaines(chaine) pour avoir un dico de chaque mot et de leur occurence
@@ -363,7 +363,7 @@ def president_nation():
     # On fair une boucle où i prendra le nom des présidents et on utilisera ensuite read et split pour avoir une
     # chaine et une liste des mots
     for i in files_names:
-        with open("./cleaned/" + "/" + i, 'r') as fichier:
+        with open("./cleaned/" + "/" + i, 'r', encoding="utf-8") as fichier:
             contenu = fichier.read()
             liste_mot = contenu.split()
 
@@ -427,7 +427,7 @@ def climat_president():
 
     # Parcourt chaque fichier, lit et divise chaque fichier en mots
     for i in files_names:
-        with open("./cleaned/{}".format(i), 'r') as fichier:
+        with open("./cleaned/{}".format(i), 'r', encoding="utf-8") as fichier:
             contenu = fichier.read()
             texte_mot_cleaned = contenu.split()
             # Obtient le nom du président à partir du nom du fichier
@@ -535,3 +535,41 @@ def mot_question_et_document(question):
         if mot in mot_repertoire:
             mot_question_documents.append(mot)
     return mot_question_documents
+
+
+
+def TF_IDF_question(question):
+    #Crée un dico vide pour y stocker le vecteur TF_IDF de la question
+    vecteur_TF_IDF_question = {}
+
+    #Appel une focntion qui va donner l'ensemble des mots de la questions
+    #Et une qui va donner l'ensemble des mots de chaque fichier ainsi que la valeur de son IDF
+    mots_questions = tokenisation_question(question)
+    mots_repertoire = IDF_par_fichier('cleaned')
+    # On appel la fonction qui donne les mots présent dans la quetion et dans le document
+    mot_question_documents = mot_question_et_document(question)
+
+    #On fait une boucle pour calculer le vecteur TF_IDF de chaque mots pour chaque fichier
+    for mots in mots_repertoire:
+
+        #On vérifie si le mot est présent à la fois dans la question et dans le texte
+        if mots in mot_question_documents:
+            #On fait un boucle pour calculer le nombre d'occurences du mot dans la question
+            occ_mot = 0
+            for mot in mots_questions:
+                if mots == mot:
+                    occ_mot += 1
+                print(occ_mot, mots)
+            #On calcul le score TF du mot
+            score_TF = occ_mot/len(mots_questions)
+            print(mots_repertoire[mots])
+            print(score_TF, mots)
+        #Si oui on calcul sa valeur et on l'ajoute au dico des vecteurs
+            vecteur_TF_IDF_question[mots] = score_TF * mots_repertoire[mots]
+
+        #Sinon sa valeur est égal à zéro
+        else:
+            vecteur_TF_IDF_question[mots] = 0
+
+    #On renvoit le dico
+    return vecteur_TF_IDF_question
