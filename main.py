@@ -623,17 +623,67 @@ def similarite_cosinus(A, B):
 def calcul_mot_plus_pertinent(question):
     TD_IDF_tous_fichier = TD_IDF_par_doc()
     TF_IDF_question1 = TF_IDF_question(question)
-    liste = []
-    indice = 0
+    dico_similarite = {}
     for i in TD_IDF_tous_fichier:
             similarite = similarite_cosinus(TD_IDF_tous_fichier[i], TF_IDF_question1)
-            liste.append(similarite)
-            indice += 1
+            dico_similarite[i] = similarite
     max = 0
-    for i in range(len(liste)):
-        if max < i:
-            max = liste[i]
+    for i in dico_similarite:
+        if max < dico_similarite[i]:
+            max = dico_similarite[i]
             indice_max = i
-    return files_names[indice_max]
-print(calcul_mot_plus_pertinent("politique et nature ne font qu'un dans la vide de certain"))
-    
+    return indice_max
+
+chaine = "politique et nature ne font qu'un dans la vide de certain"
+print(calcul_mot_plus_pertinent(chaine))
+
+# Exercice 6
+# Permet de trouver la phrase dans le texte
+
+def trouver_mot_plus_important_TF_IDF(question):
+    dico_TD_IDF_question = TF_IDF_question(question)
+    max = 0
+    mot = ""
+    for i in dico_TD_IDF_question.items():
+        if max < i[1]:
+            max = i[1]
+            mot = i[0]
+    return mot
+print(trouver_mot_plus_important_TF_IDF(chaine))
+print()
+
+def trouver_occurrence_et_phrase(document, mot):
+
+    directory = "./speeches"
+
+    # Lire le contenu du document
+    with open(directory + '/' + document, 'r') as file:
+        contenu_document = file.read()
+
+    # Trouver la position du mot dans le contenu du document
+    position_mot = -1
+    for i in range(0, len(contenu_document)):
+        if contenu_document[i:i+len(mot)] == mot:
+            position_mot = i
+            break
+
+    # Trouver le début de la phrase
+    debut_phrase = 0
+    for i in range(position_mot, 0, -1):
+        if contenu_document[i] == '.':
+            debut_phrase = i + 1  # Commencer la phrase juste après le mot
+            break
+
+    # Trouver la fin de la phrase
+    fin_phrase = len(contenu_document)
+    for i in range(position_mot, len(contenu_document)):
+        if contenu_document[i] == '.':
+            fin_phrase = i  # Finir la phrase au point
+            break
+
+    # Extraire la phrase
+    phrase_contenant_mot = contenu_document[debut_phrase:fin_phrase+1]
+    return phrase_contenant_mot
+
+print(trouver_occurrence_et_phrase(calcul_mot_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine)))
+print()
