@@ -687,3 +687,26 @@ def trouver_occurrence_et_phrase(document, mot):
 
 print(trouver_occurrence_et_phrase(calcul_mot_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine)))
 print()
+
+
+# Exercice 7 
+def generer_reponse(question, corpus, files_names, Score_TF_IDF_CLEANED):
+    liste_mot = question.split()  # Correction : split la question en mots
+    liste_mot_TF_IDF = []
+
+    idx = 0
+    # Permet d'obtenir la position de du corpus dans la liste des fichiers
+    for index in range(len(files_names)):
+        if corpus in files_names[index]:
+            idx = index
+
+    # Permet d'ajouter le score tf_idf de chaque mot correspondant dans une liste
+    for mot in liste_mot:
+        liste_mot_TF_IDF.append(Score_TF_IDF_CLEANED[liste_mot.index(mot)][idx])
+
+    # Permet d'obtenir la position du score max TF IDF dans la liste mot
+    index_max = liste_mot_TF_IDF.index(max(liste_mot_TF_IDF))
+    mot_max = liste_mot[index_max]
+    phrase = trouver_occurrence_et_phrase(corpus, mot_max)
+
+    return phrase
