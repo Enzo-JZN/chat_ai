@@ -618,3 +618,22 @@ def similarite_cosinus(A, B):
     norme_b = norme_vecteur(B)
     res = (produit_scalaire_ab/(norme_a+norme_b))
     return res
+
+# Exercice 5:  
+def calcul_mot_plus_pertinent(question):
+    TD_IDF_tous_fichier = TD_IDF_par_doc()
+    TF_IDF_question1 = TF_IDF_question(question)
+    liste = []
+    indice = 0
+    for i in TD_IDF_tous_fichier:
+            similarite = similarite_cosinus(TD_IDF_tous_fichier[i], TF_IDF_question1)
+            liste.append(similarite)
+            indice += 1
+    max = 0
+    for i in range(len(liste)):
+        if max < i:
+            max = liste[i]
+            indice_max = i
+    return files_names[indice_max]
+print(calcul_mot_plus_pertinent("politique et nature ne font qu'un dans la vide de certain"))
+    
