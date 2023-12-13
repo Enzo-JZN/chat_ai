@@ -598,3 +598,25 @@ def TD_IDF_par_doc():
     return liste_contenu
 print(TD_IDF_par_doc())
 print()
+
+# 4.) Calcul vectorielle
+
+def produit_scalaire(A, B):
+    somme = 0
+    for i in range(0, len(A)):
+        somme = somme + (A[i] * B[i])
+    return somme 
+
+def norme_vecteur(A):
+    somme = 0
+    for i in range(len(A)):
+        somme = somme + (A[i])**2
+    somme = (somme)**(1/2)
+    return somme
+
+def similarite_cosinus(A, B):
+    produit_scalaire_ab = produit_scalaire(A, B)
+    norme_a = norme_vecteur(A)
+    norme_b = norme_vecteur(B)
+    res = (produit_scalaire_ab/(norme_a+norme_b))
+    return res
