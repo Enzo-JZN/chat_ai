@@ -599,4 +599,8 @@ def TD_IDF_par_doc():
 print(TD_IDF_par_doc())
 print()
 
-
+def produit_scalaire(A, B):
+    somme = 0
+    for i in A:
+        somme = somme + (A[i] * B[i])
+    return somme 
