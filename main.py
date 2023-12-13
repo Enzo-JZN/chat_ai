@@ -573,3 +573,28 @@ def TF_IDF_question(question):
 
     #On renvoit le dico
     return vecteur_TF_IDF_question
+
+
+def TD_IDF_par_doc():
+    files_names = list_of_files("./cleaned", "txt")
+    dico_TD_IDF = TF_IDF("cleaned")
+    liste_contenu = {}
+    dico_IDF = IDF_par_fichier("cleaned")
+    for i in files_names:
+        with open(directory + '/' + i, 'r', encoding="utf-8") as fichier_IDF:
+            contenu = fichier_IDF.read()
+            contenu1 = contenu.split()
+            set_mot = set(contenu1)
+            
+        
+        dico_occ = occurences_chaines(contenu)
+        dico_fichier = {}
+        for j in dico_TD_IDF:
+            if j in set_mot:
+                dico_fichier[j] = dico_occ[j]*dico_IDF[j]
+            else : 
+                dico_fichier[j] = 0
+        liste_contenu[i] = dico_fichier
+    return liste_contenu
+print(TD_IDF_par_doc())
+print()
