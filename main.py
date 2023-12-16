@@ -94,17 +94,15 @@ def supprimer_ponctuation():
             contenu = fichier.read()
         indice = []
         # dans une liste on met toutes les positions où il y a un signe de ponctuations
-        for i in range(len(contenu)):
-            if (ord(contenu[i]) >= 21 and ord(contenu[i]) <= 47) or (
-                    ord(contenu[i]) >= 58 and ord(contenu[i]) <= 64) or (contenu[i]) == "\n":
-                indice.append(i)
-        n = 0
+        ponctuation = [',', '?', ';', '.', '!', '`', "'",'-', ':', '"']
         contenu1 = ""
         # on fait une boucle qui va copier le contenue du texte jusqu'à la postion d'une ponctuation et remplace cette
         # ponctuation par un espace et cela jusqu'à la fin du texte
-        for i in indice:
-            contenu1 = contenu1 + contenu[n:i] + " "
-            n = i + 1
+        for car in contenu:
+            if car in ponctuation:
+                contenu1 += ' '
+            else:
+                contenu1 += car
         # reécrit le nouveau texte sans la ponctuation
         with open(directory + "/" + nom_fichier, "w", encoding="utf-8") as fichier_modifie:
             fichier_modifie.write(contenu1)
