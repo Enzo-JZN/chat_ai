@@ -1,4 +1,6 @@
 from questions_part1 import *
+from questions_part2 import *
+
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -30,7 +32,8 @@ def menu():
     elif choice == "5":
         print(climat_president())
     elif choice == "6":
-        print(mot_evoque())
+        chaine = input("donner une question")
+        print(affiner_reponse(chaine, trouver_occurrence_et_phrase(calcul_doc_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine))))
     elif choice.upper() == "Q":
         print("Au revoir.")
         return
