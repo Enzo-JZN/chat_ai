@@ -1,5 +1,7 @@
-from main import *
+from questions_part1 import *
 
+def clear_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
 #On définit une fonction qui a pour role de faire menu. Soit le lien entre les différentes fonctions
 def menu():
     clear_terminal()
@@ -11,7 +13,6 @@ def menu():
           "- Tapez 3 : Si vous voulez les mots les plus répétés par le président Chirac.\n"
           "- Tapez 4 : Si vous voulez avoir le nom des présidents qui ont parlé de la Nation et celui l'ayant fait le plus souvent.\n"
           "- Tapez 5 : Si vous voulez savoir qui est le premier président à avoir parlé de l'écologie.\n"
-          "- Tapez 6 : Si vous voulez avoir l'ensemble des mots importants que tous les présidents ont évoqués.\n"
           "- Tapez Q : Si vous souhaitez quitter le menu.")
     choice = input("Tapez : ")
 
@@ -28,8 +29,6 @@ def menu():
         print(president_nation())
     elif choice == "5":
         print(climat_president())
-    elif choice == "6":
-        print(mot_evoque())
     elif choice.upper() == "Q":
         print("Au revoir.")
         return
@@ -43,7 +42,7 @@ def menu():
             menu()
         else:
             print("Au revoir.")
-            return
+
     if choice != 'Q':
         # On propose à l'utilisateur d'essayer une autre possibilité sauf s'il voulait quitter
         encore = input("Voulez-vous essayer une autre possibilité ?:\n"
@@ -55,5 +54,3 @@ def menu():
             print("Au revoir.")
         return
 
-
-(menu())
