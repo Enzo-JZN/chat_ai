@@ -149,16 +149,28 @@ def calcul_doc_plus_pertinent(question):
 
 #Recherche le mot le plus important dans la question et renvoit ce même mot
 def trouver_mot_plus_important_TF_IDF(question):
-    dico_TD_IDF_question = TF_IDF_question(question)
+    dico_TD_IDF = TD_IDF_par_doc()
+    dico_TD_IDF = dico_TD_IDF[calcul_doc_plus_pertinent(question)]
+    dico_question = TF_IDF_question(question)
     max = 0
     mot = ""
-    for i in dico_TD_IDF_question.items():
-        if max < i[1]:
+    liste = []
+    dico_similarite_mot = {}
+    for i in dico_TD_IDF:
+        dico_similarite_mot[i] = dico_question[i]*dico_TD_IDF[i]
+
+
+    for i in dico_similarite_mot.items():
+        if max < i[1] and len(i[0]) > 3:
             max = i[1]
             mot = i[0]
+        if i[1] != 0:
+            liste.append(i)
+
+
     return mot
-
-
+print(trouver_mot_plus_important_TF_IDF(chaine))
+print()
 
 def trouver_occurrence_et_phrase(document, mot):
     directory = "./speeches"
