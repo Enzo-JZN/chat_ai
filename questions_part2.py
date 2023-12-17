@@ -174,7 +174,7 @@ print()
 
 def trouver_occurrence_et_phrase(document, mot):
     directory = "./speeches"
-    with open(directory + '/' + document, 'r') as file:
+    with open(directory + '/' + document, 'r', encoding="utf-8") as file:
         contenu_document = file.read()
 
     #Cherche la position d'un mot dans un document
