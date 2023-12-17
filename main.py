@@ -1,7 +1,5 @@
 from menu import *
 from menu_chatbot import *
-def clear_terminal():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 print("Bienvenue dans cette application :")
 print("Si vous voulez voir le fonctionnalités primaires : Tapez 1")
