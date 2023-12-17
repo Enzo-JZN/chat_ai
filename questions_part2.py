@@ -149,7 +149,7 @@ def calcul_doc_plus_pertinent(question):
 
 #Recherche le mot le plus important dans la question et renvoit ce même mot
 def trouver_mot_plus_important_TF_IDF(question):
-    dico_TD_IDF = TD_IDF_par_doc()
+    dico_TD_IDF = TF_IDF_par_doc()
     dico_TD_IDF = dico_TD_IDF[calcul_doc_plus_pertinent(question)]
     dico_question = TF_IDF_question(question)
     max = 0
