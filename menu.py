@@ -29,6 +29,8 @@ def menu():
         print(president_nation())
     elif choice == "5":
         print(climat_president())
+    elif choice == "6":
+        print(mot_evoque())
     elif choice.upper() == "Q":
         print("Au revoir.")
         return
