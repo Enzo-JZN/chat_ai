@@ -196,25 +196,40 @@ def trouver_occurrence_et_phrase(document, mot):
 ################################################
 ### Question 7 Affiner et Améliorer la Réponse ###
 ################################################
+a = trouver_occurrence_et_phrase(calcul_mot_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine))
+print()
+
+def affiner_reponse(question, reponse_brute):
+
+    # Dictionnaire de formes de questions possibles et de modèles de réponses associés
+    question_starters = {
+        "Comment": "Après analyse, {}",
+        "Pourquoi": "Car, {}",
+        "Peux-tu": "Oui, bien sûr! {}",
+        "Peux tu": "Oui, bien sûr! {}"
+    }
+
+    reponse = reponse_brute
+
+    # Trouver la forme de la question
+    forme_question = None
+    for debut in question_starters:
+        if (debut) in question:
+            forme_question = debut
+            break
 
 
-def generer_reponse(question, corpus, files_names, Score_TF_IDF_CLEANED):
-    liste_mot = question.split()
-    liste_mot_TF_IDF = []
+    # Si une forme de question correspondante est trouvée, utiliser le modèle de réponse associé
+    if forme_question:
+        modele_reponse = question_starters[forme_question]
+        reponse = modele_reponse.format(reponse)
 
-    idx = 0
-    # Permet d'obtenir la position de du corpus dans la liste des fichiers
-    for index in range(len(files_names)):
-        if corpus in files_names[index]:
-            idx = index
+    # Mettre en majuscule la première lettre de la réponse
+    reponse = reponse.capitalize()
 
-    # Permet d'ajouter le score tf_idf de chaque mot correspondant dans une liste
-    for mot in liste_mot:
-        liste_mot_TF_IDF.append(Score_TF_IDF_CLEANED[liste_mot.index(mot)][idx])
+    # Ajouter un point à la fin de la réponse
+    if reponse[-1] != ('.'):
+        reponse += '.'
 
-    # Permet d'obtenir la position du score max TF IDF dans la liste mot
-    index_max = liste_mot_TF_IDF.index(max(liste_mot_TF_IDF))
-    mot_max = liste_mot[index_max]
-    phrase = trouver_occurrence_et_phrase(corpus, mot_max)
-
-    return  phrase
+    return reponse
+print(affiner_reponse(chaine, a))
