@@ -208,8 +208,6 @@ def trouver_occurrence_et_phrase(document, mot):
 ################################################
 ### Question 7 Affiner et Améliorer la Réponse ###
 ################################################
-a = trouver_occurrence_et_phrase(calcul_mot_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine))
-print()
 
 def affiner_reponse(question, reponse_brute):
 
@@ -244,4 +242,4 @@ def affiner_reponse(question, reponse_brute):
         reponse += '.'
 
     return reponse
-print(affiner_reponse(chaine, a))
+print(affiner_reponse(chaine, trouver_occurrence_et_phrase(calcul_mot_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine))))
