@@ -31,9 +31,6 @@ def menu():
         print(president_nation())
     elif choice == "5":
         print(climat_president())
-    elif choice == "6":
-        chaine = input("donner une question")
-        print(affiner_reponse(chaine, trouver_occurrence_et_phrase(calcul_doc_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine))))
     elif choice.upper() == "Q":
         print("Au revoir.")
         return
@@ -50,7 +47,7 @@ def menu():
 
     if choice != 'Q':
         # On propose à l'utilisateur d'essayer une autre possibilité sauf s'il voulait quitter
-        encore = input("Voulez-vous essayer une autre possibilité ?:\n"
+        encore = input("Voulez-vous essayer une autre possibilité prédéfini ?\n"
                        "- Tapez 1 pour Oui\n"
                        "- Tapez 2 pour Non\n")
         if encore == "1":
