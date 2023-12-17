@@ -79,7 +79,6 @@ def TF_IDF(repertoire):
 
         # On l'ajoute dans la matrice qu'on a décidé de définir sous forme de dictionnaire.
         dico_TF_IDF[mot] = resultat_TF_IDF
-    # print(len(matrice_TF_IDF))
     return dico_TF_IDF
 
 
@@ -113,7 +112,3 @@ def TF_IDF_par_doc():
     #Renvoit un dictionnaire qui a en clé le nom du document et en valeurs un dictionnaire
     # des valeurs TF_IDF du document
     return liste_contenu
-
-
-print(TF_IDF_par_doc())
-print()
