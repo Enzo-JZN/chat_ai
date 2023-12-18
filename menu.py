@@ -22,7 +22,7 @@ def menu():
 
     # Selon le choix de l'utilisateur on appelle la fonction correspondante
     if choix == "1":
-        print(calcul_mot_dit_nn_important(), mot_moins_important())
+        print(calcul_mot_dit_nn_important()) #mot_moins_important()
     elif choix == "2":
         print(score_IDF_eleve())
     elif choix == "3":
