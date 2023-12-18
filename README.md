@@ -5,12 +5,19 @@ Ce projet a pour objectif d'analyser des textes afin de répondre à des questio
 
 ## Structure
 Il est composé de sept programmes principaux:
+
 -Tout d'abord :'main.py' qui a pour objet de gérer les échanges entre l'utilisateur et la machine. Il est rélié à tout les autres.
+
 -Puis : 'menu.py' qui permet à l'utilisateur d'avoir la réponse à certaines questions en tapant seulement des chiffres pour une utilisation plus simple du projet.
+
 -le 'menu_chatbot.py'qui lui est un menu pour permettre à l'utilisateur de poser une question au chatBot
+
 -le 'calculs.py' qui contient les fonctions faisant les calculs nécessairent au programme
+
 -le 'gestion_fichiers.py', lui s'occupe de modifier les fichiers textes pour qu'ils soient plus facilement utilisable par le programme
+
 -Enfin 'question_part1.py' et 'question_part2.py' qui gèrent respectivement les fonctions permettant de répondre aux questions des parties 1 et 2.
+
 
 De plus il est important de noter que chaque fonction principale de la partie 1 allant de 1 à 6 à sa propre branche sur github permettant une lisibilité plus claire du projet.
 
