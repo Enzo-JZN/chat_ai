@@ -4,6 +4,7 @@ from calculs import *
 ### Question 1 Affichage valeur TF-IDF == 0 ###
 ###############################################
 
+# Fonction qui cherche les mots les moins importants et les renvois
 # Partie 1
 def calcul_mot_dit_nn_important():
     # Appel de la fonction TF_IDF pour obtenir la matrice
@@ -42,7 +43,8 @@ def mot_moins_important():
 ### Question 2 Afficher le(s) mot(s) ayant le score TF-IDF le plus élevé ###
 ############################################################################
 
-
+# C'est une fonction qui cherche les mots ayant le score TF-IDF le plus élevé
+# Retourne ces mêmes mots
 def score_IDF_eleve():
     # Initialisation d'une liste pour stocker les mots et leurs valeur TF_IDF
     liste = []
@@ -77,7 +79,8 @@ def score_IDF_eleve():
 ### Question 3 Indiquer le mot le plus utilisé par le predident chirac ###
 ##########################################################################
 
-# On crée une fonction pour trouver le(s) mot(s) le(s) plus répété(s) par le président Chirac
+# On crée une fonction pour trouver le(s) mot(s) le(s) plus répété(s) par le président Chirac.
+# Et retourne la liste des mots qu'il a le plus prononcés
 def indiquer_le_mot_plus_utilise(president):
     # On donne le chemin pour acceder au fichier qui contiennent le nom du president recherche
     directory = './cleaned'
@@ -115,7 +118,7 @@ def indiquer_le_mot_plus_utilise(president):
 ################################################################
 ### Question 4 les présidents ayant abordé le thème nation. ###
 ###############################################################
-
+#Cette fonction cherche les présidents qui ont parlé de la "Nation" et renvoit la liste de ceux qui en ont parlé
 def president_nation():
     # Initialisation d'une liste et d'un dico
     listes_president = []
@@ -165,7 +168,7 @@ def president_nation():
 
 
 ################################################################################
-### 5. Indiquer le premier président à parler du climat et/ou de l’écologie ###
+### 5. Indiquer les présidents qui ont parler du climat et/ou de l’écologie ###
 ###############################################################################
 
 # Dictionnaire brut avec les noms des présidents et leurs dates d'élection
@@ -179,8 +182,8 @@ presidents_et_dates = {
 }
 
 
-# La fonction suivante recherche le président qui a abordé en premier les sujets liés au climat, à l'écologie
-# ou au réchauffement dans les discours.
+# La fonction suivante recherche la liste des présidents qui ont abordé en premier les sujets liés au climat, à l'écologie
+# ou au réchauffement dans les discours et renvoie cette liste.
 
 def climat_president():
     # Obtient la liste des noms de fichiers dans le répertoire "cleaned"
@@ -211,21 +214,7 @@ def climat_president():
     # Si aucun président n'a abordé ces sujets, retourne "aucun"
     if liste_president == []:
         return "aucun"
-    # Si un seul président a abordé ces sujets, retourne son nom
-    elif len(liste_president) == 1:
-        return liste_president[0]
-    # Si plusieurs présidents ont abordé ces sujets, trouve celui qui a parlé en premier
+    # Sinon renvoit les présidents qui en ont parlé
     else:
-        minimum = 999999999999999999
-        president = ''
-        for i in liste_president:
-            # Recherche le président avec le discours le plus ancien sur ces sujets
-            if minimum > presidents_et_dates[i]:
-                minimum = presidents_et_dates[i]
-                president = i
-        return "Le président ayant parlé en premier du climat/écologie est M." + president
-
-
-# Appelle la fonction et imprime le résultat
-
+        return liste_president
 
