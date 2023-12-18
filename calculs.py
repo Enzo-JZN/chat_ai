@@ -15,19 +15,21 @@ def IDF_par_fichier(repertoire):
             contenu = fichier_IDF.read()
             contenu = contenu.split()
             liste_contenu += contenu
-    set_mot = set(liste_contenu)
-    # On crée un dico qui va contenir tous les mots ainsi que leurs IDF
+        set_contenu = set(liste_contenu)
     dico = {}
-    # Pour chaque mot on va vérifier s'il se trouve dans un document et pour chaque document on va ajouté +1 à un compteur
-    # afin de pourvoir calculer l'IDF
-    for mot in set_mot:
+
+    #remplacer liste contenue par les mots dans le dico
+
+    # parcours la liste de mots et compte le nombre d'occurence pour ensuite calculer le score IDF
+    for mot in set_contenu:
         occurence = 0
         for i in files_names:
-            with open(directory + '/' + i, 'r', encoding="utf-8") as fichier_IDF:
+            with open('./{}/{}'.format(repertoire, i), 'r') as fichier_IDF :
                 contenu = fichier_IDF.read()
+                contenu = contenu.split()
                 if mot in contenu:
                     occurence += 1
-        calcul_idf = math.log10((len(files_names) / occurence) + 1)
+        calcul_idf = math.log10((len(files_names) / occurence))
         dico[mot] = calcul_idf
     return dico
 
