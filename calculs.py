@@ -7,6 +7,10 @@ from gestion_fichiers import *
 def IDF_par_fichier(repertoire):
     directory = './{}'.format(repertoire)  # "/Users/enzojuzyna/Downloads/projet/speeches"
     files_names = list_of_files(directory, "txt")
+        if len(files_names) != 8:
+        print("Fichers introuvables dans {}".format(directory))
+        exit()
+            
     # on va créer une liste qui va contenir tous les mots présents dans les textes du répertoire en un seul exemplaire
     contenu = ""
     liste_contenu = []
