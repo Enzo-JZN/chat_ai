@@ -12,7 +12,7 @@ def menu():
     print("Que voulez-vous faire ?\n"
           "- Tapez 1 : Si vous voulez avoir les mots les moins importants des fichiers.\n"
           "- Tapez 2 : Si vous voulez afficher les mots avec les TF_IDF les plus élevés.\n"
-          "- Tapez 3 : Si vous voulez les mots les plus répétés par le président Chirac.\n"
+          "- Tapez 3 : Si vous voulez le mot le plus répété par le président Chirac et son nombre d'occurrence.\n"
           "- Tapez 4 : Si vous voulez avoir le nom des présidents qui ont parlé de la Nation et celui l'ayant fait le plus souvent.\n"
           "- Tapez 5 : Si vous voulez savoir qui est le premier président à avoir parlé de l'écologie.\n"
           "- Tapez Q : Si vous souhaitez quitter le menu.")
