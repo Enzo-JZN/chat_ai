@@ -35,7 +35,7 @@ def IDF_par_fichier(repertoire):
 a = IDF_par_fichier("cleaned")
 
 
-# Fonction TF_IDF
+# Fonction qui cherche la valeur TF-IDF de chaque mot et retourne un dictionnaire reliant le mot et sa valeur
 
 def TF_IDF(repertoire):
     # Initialisation d'un dictionnaire pour stocker la matrice TF-IDF, d'un dico pour recevoir la valeur de chaque mot et son idf,
@@ -85,6 +85,8 @@ def TF_IDF(repertoire):
 # On teste la fonction avec le répertoire cleaned.
 res = TF_IDF("cleaned")
 
+# Fonction qui cherche la valeur TF-IDF de chaque mot pour chquque documents
+# Et retourne un dictionnaire le nom du document et son propre dictionnaire des valeurs TF-IDF des mots qu'il contient
 
 
 def TF_IDF_par_doc():
@@ -112,3 +114,5 @@ def TF_IDF_par_doc():
     #Renvoit un dictionnaire qui a en clé le nom du document et en valeurs un dictionnaire
     # des valeurs TF_IDF du document
     return liste_contenu
+
+
