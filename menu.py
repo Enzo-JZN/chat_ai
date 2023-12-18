@@ -1,10 +1,17 @@
 from questions_part1 import *
 from questions_part2 import *
 
+######################################################################################################################
+### Le fichier menu.py sert de menu pour permettre à l'utilisateur d'afficher les fonction prédéfinies du programme###
+######################################################################################################################
 
+# Fonction qui permet d'effacer le terminal pour que ce soit plus lisible, il n'y a rien à retourner 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
 #On définit une fonction qui a pour role de faire menu. Soit le lien entre les différentes fonctions
+#Aucune sortie ce n'est qu'un affichage
 def menu():
     clear_terminal()
 
