@@ -2,7 +2,10 @@ from calculs import *
 
 ###############################################
 ### Question 1 Tokenisation de la Question ###
-###############################################
+##############################################
+
+# Fonction qui va prendre la question de l'utilisateur et la séparer en plusieurs mots distincts sans ponctuation et
+# sans majuscules. Renvoie une liste des mots de la question
 def tokenisation_question(question):
     # On va d'abord mettre tous les termes de la question en minuscules
     # Pour cela on crée une chaine de caractère vide où on va stocker les mots
@@ -38,6 +41,8 @@ def tokenisation_question(question):
 ########################################################################
 ### Question 2 Recherche des mots dans le Corpus et dans la question ###
 ########################################################################
+
+# Fonction qui cherche les mots présents dans le corpus et dans la question et retourne cette liste de mots
 def mot_question_et_document(question):
     # On crée une liste vide pour y stocker les mots présents à la fois dans la question et dans le document
     mot_question_documents = []
@@ -55,8 +60,10 @@ def mot_question_et_document(question):
 
 
 ##########################################################
-### Question 3 Calcul du vecteur TF-IDF pour la Question ###
+### Question 3 Calcul du vecteur TF-IDF pour la Question ##
 ##########################################################
+
+# Fonction qui calcul le vecteur TF-IDF de la question et le retourne dans un dictionnaire
 def TF_IDF_question(question):
     # Crée un dico vide pour y stocker le vecteur TF_IDF de la question
     vecteur_TF_IDF_question = {}
@@ -94,14 +101,14 @@ def TF_IDF_question(question):
 ### Question 4 Calcul de la Similarité ###
 #########################################
 
-#Calcul le produit scalaire entre deux vecteurs
+# Calcul le produit scalaire entre deux vecteurs et le retourne
 def produit_scalaire(A, B):
     somme = 0
     for i in A:
         somme = somme + (A[i] * B[i])
     return somme
 
-#Calcul la norme d'un vecteur
+# Calcul la norme d'un vecteur et la retourne
 def norme_vecteur(A):
     somme = 0
     for i in A:
@@ -109,7 +116,7 @@ def norme_vecteur(A):
     somme = (somme) ** (1 / 2)
     return somme
 
-#Calcul la similarité cosinus entre deux vecteurs
+# Calcul la similarité cosinus entre deux vecteurs et la retourne
 def similarite_cosinus(A, B):
     produit_scalaire_ab = produit_scalaire(A, B)
     norme_a = norme_vecteur(A)
@@ -120,6 +127,8 @@ def similarite_cosinus(A, B):
 ###########################################################
 ### Question 5 Calcul du Document le Plus Pertinent ###
 ###########################################################
+
+# Fonction qui cherche le document le plus pertinent pour répondre à la question et le renvoi 
 def calcul_doc_plus_pertinent(question):
     #Calcul les vecteurs TF_IDF nécessaires à la fonction
     TF_IDF_tous_fichier = TF_IDF_par_doc()
@@ -147,7 +156,7 @@ def calcul_doc_plus_pertinent(question):
 # Permet de trouver la phrase dans le texte
 
 
-#Recherche le mot le plus important dans la question et renvoit ce même mot
+# Recherche le mot le plus important dans la question et renvoi ce même mot
 def trouver_mot_plus_important_TF_IDF(question):
     dico_TD_IDF = TF_IDF_par_doc()
     dico_TD_IDF = dico_TD_IDF[calcul_doc_plus_pertinent(question)]
@@ -169,30 +178,29 @@ def trouver_mot_plus_important_TF_IDF(question):
 
 
     return mot
-print(trouver_mot_plus_important_TF_IDF(chaine))
-print()
 
+# Fonction qui cherche un mot dans un document et renvoie entièrement la phrase ou ce mot est présent 
 def trouver_occurrence_et_phrase(document, mot):
     directory = "./speeches"
     with open(directory + '/' + document, 'r', encoding="utf-8") as file:
         contenu_document = file.read()
 
-    #Cherche la position d'un mot dans un document
+    # Cherche la position d'un mot dans un document
     position_mot = -1
     for i in range(0, len(contenu_document)):
         if contenu_document[i:i + len(mot)] == mot:
             position_mot = i
             break
 
-    #Cherche la phrase qui contient le mot
+    # Cherche la phrase qui contient le mot
     debut_phrase = 0
-    #On fait un boucle qui va chercher le point qui termine la phrase précédente, pour trouver où commence celle là.
+    # On fait une boucle qui va chercher le point qui termine la phrase précédente, pour trouver où commence celle là.
     for i in range(position_mot, 0, -1):
         if contenu_document[i] == '.':
             debut_phrase = i + 1
             break
 
-    #Cherche la fin de la phrase
+    # Cherche la fin de la phrase
     fin_phrase = len(contenu_document)
     # Fait une boucle pour trouver le point de fin de phrase.
     for i in range(position_mot, len(contenu_document)):
@@ -200,7 +208,7 @@ def trouver_occurrence_et_phrase(document, mot):
             fin_phrase = i
             break
 
-    #Renvoit la première phrase ou se trouve le mot
+    # Renvoit la première phrase ou se trouve le mot
     phrase_contenant_mot = contenu_document[debut_phrase:fin_phrase + 1]
     return phrase_contenant_mot
 
@@ -209,6 +217,8 @@ def trouver_occurrence_et_phrase(document, mot):
 ### Question 7 Affiner et Améliorer la Réponse ###
 ################################################
 
+# Fonction qui améliore un peu la réponse en proposant des bouts de phrases automatiques.
+# Elle renvoie la réponse finale à la question de l'utilisateur 
 def affiner_reponse(question, reponse_brute):
 
     # Dictionnaire de formes de questions possibles et de modèles de réponses associés
@@ -242,4 +252,3 @@ def affiner_reponse(question, reponse_brute):
         reponse += '.'
 
     return reponse
-print(affiner_reponse(chaine, trouver_occurrence_et_phrase(calcul_mot_plus_pertinent(chaine), trouver_mot_plus_important_TF_IDF(chaine))))
