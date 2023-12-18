@@ -15,8 +15,8 @@ def calcul_mot_dit_nn_important():
     for i in valeur_tf_idf.items():
         occurence = 0
         # On va ensuite compter le nombre de 0, pour savoir si ce mot à un TD-IDF = 0 dans tous les fichiers
-        for zero in i:
-            if zero == 0:
+        for zero in i[1]:
+            if int(zero) == 0:
                 occurence += 1
             else:
                 break
