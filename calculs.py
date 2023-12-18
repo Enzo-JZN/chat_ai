@@ -8,7 +8,7 @@ from gestion_fichiers import *
 def IDF_par_fichier(repertoire):
     directory = './{}'.format(repertoire)  # "/Users/enzojuzyna/Downloads/projet/speeches"
     files_names = list_of_files(directory, "txt")
-    if len(files_names) != 8:
+    if len(files_names) == 0:
         print("Fichers introuvables dans {}".format(directory))
         exit()
 
@@ -28,16 +28,15 @@ def IDF_par_fichier(repertoire):
 
     # parcours la liste de mots et compte le nombre d'occurence pour ensuite calculer le score IDF
     for mot in set_contenu:
-        occurence = 1
+        occurence = 0
         for i in files_names:
-            with open('./{}/{}'.format('cleaned', i), 'r') as fichier_IDF:
+            with open('./{}/{}'.format(repertoire, i), 'r') as fichier_IDF :
                 contenu = fichier_IDF.read()
                 contenu = contenu.split()
                 if mot in contenu:
                     occurence += 1
-        if occurence != 0:
-            calcul_idf = math.log10((len(files_names) / occurence))
-            dico[mot] = calcul_idf
+        calcul_idf = math.log10((len(files_names) / occurence))
+        dico[mot] = calcul_idf
 
     return dico
 
