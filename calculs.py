@@ -30,7 +30,7 @@ def IDF_par_fichier(repertoire):
     for mot in set_contenu:
         occurence = 0
         for i in files_names:
-            with open('./{}/{}'.format(repertoire, i), 'r') as fichier_IDF :
+            with open('./{}/{}'.format(repertoire, i), 'r', encoding="utf-8") as fichier_IDF :
                 contenu = fichier_IDF.read()
                 contenu = contenu.split()
                 if mot in contenu:
