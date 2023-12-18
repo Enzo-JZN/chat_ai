@@ -56,7 +56,7 @@ def president_prenom(x):
 
 
 # Fonction qui convertir texte en miniscules + creation repertoire cleaned + copier contenue dans le nouveau repertoire
-# Créé des nouveaux fichiers avec le texte nettoyés 
+# Créé des nouveaux fichiers avec le texte nettoyés
 def convertir_textes_miniscules():
     # on trouve le chemin pour acceder à speeches et ensuite on obtient la liste files.names
     directory = "./speeches"
@@ -112,7 +112,7 @@ supprimer_ponctuation()
 # Écrire une fonction qui prend en paramètre une chaine de caractères et qui retourne un dictionnaire
 # associant à chaque mot le nombre de fois qu’il apparait dans la chaine de caractères
 # Renvoie un dictionnaire avec en clé des mots et en valeur leurs occurrences
-def occurences_chaines(chaine): 
+def occurences_chaines(chaine):
     indice = []
     dico = {}
     liste_mot = []
