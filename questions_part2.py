@@ -170,10 +170,13 @@ def trouver_mot_plus_important_TF_IDF(question):
     mot = ""
     liste = []
     dico_similarite_mot = {}
+
+    # Calcul la similarité entre les mots de la question et ceux du document
     for i in dico_TD_IDF:
         dico_similarite_mot[i] = dico_question[i]*dico_TD_IDF[i]
 
-
+    # Pour chaque mot vérifie si la similarité est la plus importante et si le mot fait plus de trois lettres
+    # Si les conditions sont respectés ce mot devient le mot pris en compte pour le moment
     for i in dico_similarite_mot.items():
         if max < i[1] and len(i[0]) > 3:
             max = i[1]
