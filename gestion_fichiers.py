@@ -1,5 +1,11 @@
 import os
 
+################################################################################################################
+### Le fichier gestion_fichiers.py contient l'ensemble des fonctions qui gèrent le traitement des textes pour ##
+### faciliter leurs utilisations                                                                              ##
+################################################################################################################
+
+#Fonction qui permet de retourner la liste des fichiers dans un répertoire donné
 def list_of_files(directory, extension):
     files_names = []
     for filename in os.listdir(directory):
