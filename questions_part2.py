@@ -225,19 +225,26 @@ def trouver_occurrence_et_phrase(document, mot):
 ### Question 7 Affiner et Améliorer la Réponse ###
 ################################################
 
+################################################
+### Question 7 Affiner et Améliorer la Réponse ###
+################################################
+
 # Fonction qui améliore un peu la réponse en proposant des bouts de phrases automatiques.
 # Elle renvoie la réponse finale à la question de l'utilisateur 
-def affiner_reponse(question, reponse_brute):
+def affiner_reponse(question, ph_brute):
 
     # Dictionnaire de formes de questions possibles et de modèles de réponses associés
     question_starters = {
         "Comment": "Après analyse, {}",
         "Pourquoi": "Car, {}",
-        "Peux-tu": "Oui, bien sûr! {}",
-        "Peux tu": "Oui, bien sûr! {}"
+        "Peux-tu": "Oui, bien sûr! {}"
     }
 
-    reponse = reponse_brute
+    # Extraire le texte brut de la réponse générée
+    reponse = ph_brute
+    if reponse[0] == "\n":
+        rest_reponse = reponse[1:]
+        reponse = rest_reponse
 
     # Trouver la forme de la question
     forme_question = None
@@ -253,10 +260,14 @@ def affiner_reponse(question, reponse_brute):
         reponse = modele_reponse.format(reponse)
 
     # Mettre en majuscule la première lettre de la réponse
-    reponse = reponse.capitalize()
+    if  ord(reponse[0]) <= 122 and ord(reponse[0]) >= 97:
+        premier_caractere = chr(ord(reponse[0]) - 32)
+        rest_reponse = premier_caractere + reponse[1:]
+        reponse = rest_reponse
 
     # Ajouter un point à la fin de la réponse
     if reponse[-1] != ('.'):
         reponse += '.'
 
     return reponse
+
