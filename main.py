@@ -2,7 +2,7 @@ from menu_chatbot import *
 from menu import *
 
 #############################################################################################################
-### La Fonction main.py a pour rôle de gérer les échanges entre l'utilisateur et le reste de l'application ###
+### Le Fichier main.py a pour rôle de gérer les échanges entre l'utilisateur et le reste de l'application ###
 #############################################################################################################
 
 
