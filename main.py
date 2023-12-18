@@ -1,12 +1,18 @@
 from menu_chatbot import *
 from menu import *
 
+#############################################################################################################
+### La Fonction main.py a pour rôle de gérer les échanges entre l'utilisateur et le reste de l'application ###
+#############################################################################################################
+
+
 print("Bienvenue dans cette application :")
 print("Si vous voulez voir le fonctionnalités primaires : Tapez 1")
 print("Si vous voulez discutez avec le ChatBot : Tapez 2")
 print("Si vous voulez quitter : Tapez Q")
 
-# Fonction qui sert de menu global pour permettre à l'utilisateur d'avoir toutes les fonctionnalitées
+# Fonction qui sert de menu global pour permettre à l'utilisateur d'avoir toutes les fonctionnalitées 
+# Elle ne retourne rien car elle sert d'affichage
 def choix_menu():
     choix = input("Quel est votre choix : ")
     if choix == '1':
