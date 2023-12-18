@@ -1,4 +1,4 @@
-import os 
+import os
 
 def list_of_files(directory, extension):
     files_names = []
@@ -15,7 +15,7 @@ files_names = list_of_files(directory, "txt")
 print()
 
 
-# Extraire les noms des présidents à partir des noms des fichiers texte fournis ;
+# Extraire les noms des présidents à partir des noms des fichiers texte fournis et retourne un set de tous les noms
 def extract_president_names(file):
     liste = set()
     nom_presidents = set()  # Utilisez un ensemble pour éviter les doublons
@@ -50,16 +50,13 @@ def extract_president_names(file):
 dico_prenom = {"Giscard dEstaing": "Valéry", "Macron": "Emmanuelle", "Mitterrand": "François", "Sarkozy": "Nicolas",
         "Chirac": "Jacques", "Hollande": "François"}
 
-
+# Fonction qui retourne le dictionnaire des prénoms des présidents
 def president_prenom(x):
     return (dico_prenom[x])
 
 
-# Afficher la liste des noms des présidents (attention aux doublons) ;
-# print(extract_president_names(files_names))
-
-
-# convertir texte en miniscules + creation repertoire cleaned + copier contenue dans le nouveau repertoire
+# Fonction qui convertir texte en miniscules + creation repertoire cleaned + copier contenue dans le nouveau repertoire
+# Créé des nouveaux fichiers avec le texte nettoyés 
 def convertir_textes_miniscules():
     # on trouve le chemin pour acceder à speeches et ensuite on obtient la liste files.names
     directory = "./speeches"
@@ -83,7 +80,7 @@ def convertir_textes_miniscules():
             contenu = fichier2.read()
             fichier.write(contenu.lower())
 
-
+# Fonction qui supprime la ponctuation dans un fichier et réécrit le texte sans ponctuation dans un autre fichier
 def supprimer_ponctuation():
     # trouve le chemin d'accés des fichiers à nettoyer
     directory = "./cleaned"
@@ -114,7 +111,8 @@ supprimer_ponctuation()
 
 # Écrire une fonction qui prend en paramètre une chaine de caractères et qui retourne un dictionnaire
 # associant à chaque mot le nombre de fois qu’il apparait dans la chaine de caractères
-def occurences_chaines(chaine):
+# Renvoie un dictionnaire avec en clé des mots et en valeur leurs occurrences
+def occurences_chaines(chaine): 
     indice = []
     dico = {}
     liste_mot = []
@@ -125,7 +123,7 @@ def occurences_chaines(chaine):
                 chaine[i]) == "\n":
             indice.append(i)
 
-    # On utlisera les indices precedemment acquis pour effectuer des slides dans la chaine de caractere initial et
+    # On utlisera les indices précèdemment acquis pour effectuer des slides dans la chaine de caractere initial et
     # ainsi copier les mots.
     n = 0
     for i in indice:
