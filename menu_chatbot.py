@@ -1,4 +1,6 @@
 from menu import *
+
+# Fonction répond à une question de l'utilisateur
 def reponses_chatbot():
     chaine = input("Posez une question : ")
     print(affiner_reponse(chaine, trouver_occurrence_et_phrase(calcul_doc_plus_pertinent(chaine),
@@ -10,6 +12,8 @@ def reponses_chatbot():
         reponses_chatbot()
     else:
         print("Au revoir")
+
+# Fonction qui sert de menu au chatBot pour répondre à l'utilisateur
 def menu_chatbot():
     print('Bienvenue dans ce Chatbot :')
     print("Ce Chatbot va répondre à vos questions en analysant des textes de présidents français.")
