@@ -10,9 +10,9 @@ print("Si vous voulez quitter : Tapez Q")
 def choix_menu():
     choix = input("Quel est votre choix : ")
     if choix == '1':
-        print(menu())
+        menu()
     elif choix == '2':
-        print(menu_chatbot())
+        menu_chatbot()
     elif choix == 'Q':
         print("Merci et au revoir.")
     else:
@@ -25,5 +25,5 @@ def choix_menu():
         else:
             print("Au revoir.")
     return
-print(choix_menu())
+choix_menu()
 
