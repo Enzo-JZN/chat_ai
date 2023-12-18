@@ -48,6 +48,8 @@ Lilian Cao
 
 https://github.com/Enzo-JZN/chat_ai
 
+## Rapport du projet
+
 [rapport projet python.pdf](https://github.com/Enzo-JZN/chat_ai/files/13708277/rapport.projet.python.pdf)
 
 
