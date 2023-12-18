@@ -6,6 +6,7 @@ print("Si vous voulez voir le fonctionnalités primaires : Tapez 1")
 print("Si vous voulez discutez avec le ChatBot : Tapez 2")
 print("Si vous voulez quitter : Tapez Q")
 
+# Fonction qui sert de menu global pour permettre à l'utilisateur d'avoir toutes les fonctionnalitées
 def choix_menu():
     choix = input("Quel est votre choix : ")
     if choix == '1':
@@ -20,11 +21,9 @@ def choix_menu():
         print("Si non : Tapez 2")
         nouveau_choix = input("Quel est votre choix : ")
         if nouveau_choix == '1':
-            choix = input("Quel est votre choix : ")
-            if choix == '1':
-                print(choix_menu())
-            else:
-                print("Au revoir.")
+            print(choix_menu())
+        else:
+            print("Au revoir.")
     return
 print(choix_menu())
 
