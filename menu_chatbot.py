@@ -1,5 +1,9 @@
 from menu import *
 
+####################################################################################################
+### Le fichier menu_chatbot.py sert de menu pour permettre à l'utilisateur de poser des questions###
+#####################################################################################################
+
 # Fonction répond à une question de l'utilisateur
 def reponses_chatbot():
     chaine = input("Posez une question : ")
