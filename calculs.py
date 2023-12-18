@@ -1,6 +1,9 @@
 import math
 from gestion_fichiers import *
 
+################################################################################################################
+### Le fichier calculs.py contient l'ensemble des fonctions qui gèrent les calculs dont le chatBot a besoin ###
+################################################################################################################
 
 # Écrire une fonction qui prend en paramètre le répertoire où se trouve l’ensemble des fichiers du corpus
 # et qui retourne un dictionnaire associant à chaque mot son score IDF.
