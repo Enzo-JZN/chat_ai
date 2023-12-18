@@ -1,16 +1,18 @@
 import math
 from gestion_fichiers import *
 
+
 # Écrire une fonction qui prend en paramètre le répertoire où se trouve l’ensemble des fichiers du corpus
 # et qui retourne un dictionnaire associant à chaque mot son score IDF.
 
 def IDF_par_fichier(repertoire):
     directory = './{}'.format(repertoire)  # "/Users/enzojuzyna/Downloads/projet/speeches"
     files_names = list_of_files(directory, "txt")
-        if len(files_names) != 8:
+    if len(files_names) != 8:
         print("Fichers introuvables dans {}".format(directory))
         exit()
-            
+
+
     # on va créer une liste qui va contenir tous les mots présents dans les textes du répertoire en un seul exemplaire
     contenu = ""
     liste_contenu = []
@@ -22,21 +24,22 @@ def IDF_par_fichier(repertoire):
         set_contenu = set(liste_contenu)
     dico = {}
 
-    #remplacer liste contenue par les mots dans le dico
+    # remplacer liste contenue par les mots dans le dico
 
     # parcours la liste de mots et compte le nombre d'occurence pour ensuite calculer le score IDF
     for mot in set_contenu:
-        occurence = 0
+        occurence = 1
         for i in files_names:
-            with open('./{}/{}'.format(repertoire, i), 'r') as fichier_IDF :
+            with open('./{}/{}'.format('cleaned', i), 'r') as fichier_IDF:
                 contenu = fichier_IDF.read()
                 contenu = contenu.split()
                 if mot in contenu:
                     occurence += 1
-        calcul_idf = math.log10((len(files_names) / occurence))
-        dico[mot] = calcul_idf
-    return dico
+        if occurence != 0:
+            calcul_idf = math.log10((len(files_names) / occurence))
+            dico[mot] = calcul_idf
 
+    return dico
 
 a = IDF_par_fichier("cleaned")
 
@@ -91,17 +94,18 @@ def TF_IDF(repertoire):
 # On teste la fonction avec le répertoire cleaned.
 res = TF_IDF("cleaned")
 
+
 # Fonction qui cherche la valeur TF-IDF de chaque mot pour chquque documents
 # Et retourne un dictionnaire le nom du document et son propre dictionnaire des valeurs TF-IDF des mots qu'il contient
 
 
 def TF_IDF_par_doc():
-    #On appel les fonctiosn et on créé les variables nécessaires à cette fonction
+    # On appel les fonctiosn et on créé les variables nécessaires à cette fonction
     files_names = list_of_files("./cleaned", "txt")
     dico_TF_IDF = TF_IDF("cleaned")
     liste_contenu = {}
     dico_IDF = IDF_par_fichier("cleaned")
-    #On fait une boucle qui va séparer le contenu de chaques document dans un dico
+    # On fait une boucle qui va séparer le contenu de chaques document dans un dico
     for i in files_names:
         with open(directory + '/' + i, 'r', encoding="utf-8") as fichier_IDF:
             contenu = fichier_IDF.read()
@@ -117,8 +121,6 @@ def TF_IDF_par_doc():
             else:
                 dico_fichier[j] = 0
         liste_contenu[i] = dico_fichier
-    #Renvoit un dictionnaire qui a en clé le nom du document et en valeurs un dictionnaire
+    # Renvoit un dictionnaire qui a en clé le nom du document et en valeurs un dictionnaire
     # des valeurs TF_IDF du document
     return liste_contenu
-
-
