@@ -203,8 +203,7 @@ def climat_president():
                 nom_president = nom_president[:-1]
 
             # Vérifie si des termes liés au climat, à l'écologie ou au réchauffement sont présents dans le texte
-            if ("ecologie" in texte_mot_cleaned) or ("climat" in texte_mot_cleaned) or (
-                    "réchauffement" in texte_mot_cleaned):
+            if ("ecologie" in texte_mot_cleaned) or ("climat" in texte_mot_cleaned) or ("réchauffement" in texte_mot_cleaned) or ("écologique" in texte_mot_cleaned) or ("ecolo" in texte_mot_cleaned):
 
                 # Ajoute le nom du président à la liste s'il a parlé de l'écologie et s'il n'est pas déjà présent
                 if not (nom_president in liste_president):
